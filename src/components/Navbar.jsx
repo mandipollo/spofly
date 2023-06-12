@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Button, IconButton, Toolbar, Typography } from "@mui/material";
+import { AppBar, Button, IconButton, Switch, Toolbar } from "@mui/material";
 import { useTheme } from "@emotion/react";
 
 const Navbar = () => {
@@ -13,10 +13,14 @@ const Navbar = () => {
 				display: "flex",
 				justifyContent: "flex-end",
 				flexDirection: "row",
+				overflow: "hidden",
 			}}
 		>
 			<Toolbar>
-				<Button variant="text">Sign up</Button>
+				<Switch></Switch>
+				<Button sx={{ marginRight: 6 }} variant="text">
+					Sign up
+				</Button>
 				<Button
 					size="large"
 					sx={{ borderRadius: 3 }}

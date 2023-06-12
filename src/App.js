@@ -8,12 +8,7 @@ const App = () => {
 	return (
 		<ThemeProvider theme={theme}>
 			<Box>
-				<Stack
-					display="flex"
-					justifyContent="space-around"
-					spacing={2}
-					direction="row"
-				>
+				<Stack display="flex" justifyContent="space-around" direction="row">
 					<Sidebar />
 					<Feed />
 				</Stack>

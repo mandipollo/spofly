@@ -1,6 +1,7 @@
 import React from "react";
 import {
 	Box,
+	Button,
 	List,
 	ListItem,
 	ListItemButton,
@@ -15,18 +16,25 @@ import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
-import { useTheme } from "@emotion/react";
-
 const Sidebar = () => {
-	const theme = useTheme();
 	return (
-		<Box flex={1} padding={2}>
-			<Box position="fixed">
+		<Box
+			flex={1.5}
+			padding={2}
+			sx={{
+				backgroundColor: "black",
+				color: "white",
+				display: { xs: "none", md: "block", lg: "block" },
+			}}
+		>
+			<Box>
 				<List>
 					<ListItem disablePadding>
 						<ListItemButton component="a">
 							<ListItemIcon>
-								<PlayCircleIcon sx={{ width: "60px", height: "60px" }} />
+								<PlayCircleIcon
+									sx={{ width: "60px", height: "60px", color: "white" }}
+								/>
 							</ListItemIcon>
 							<ListItemText
 								primary="Spofly"
@@ -36,7 +44,7 @@ const Sidebar = () => {
 					</ListItem>
 					<ListItem disablePadding>
 						<ListItemButton component="a">
-							<ListItemIcon>
+							<ListItemIcon sx={{ color: "white" }}>
 								<HomeIcon />
 							</ListItemIcon>
 							<ListItemText primary="Home" />
@@ -44,7 +52,7 @@ const Sidebar = () => {
 					</ListItem>
 					<ListItem disablePadding>
 						<ListItemButton component="a">
-							<ListItemIcon>
+							<ListItemIcon sx={{ color: "white" }}>
 								<SearchIcon />
 							</ListItemIcon>
 							<ListItemText primary="Search" />
@@ -52,7 +60,7 @@ const Sidebar = () => {
 					</ListItem>
 					<ListItem disablePadding>
 						<ListItemButton component="a">
-							<ListItemIcon>
+							<ListItemIcon sx={{ color: "white" }}>
 								<LibraryAddIcon />
 							</ListItemIcon>
 							<ListItemText primary="Library" />
@@ -60,7 +68,7 @@ const Sidebar = () => {
 					</ListItem>
 					<ListItem disablePadding>
 						<ListItemButton component="a">
-							<ListItemIcon>
+							<ListItemIcon sx={{ color: "white" }}>
 								<PlaylistAddIcon />
 							</ListItemIcon>
 							<ListItemText primary="Create Playlist" />
@@ -68,7 +76,7 @@ const Sidebar = () => {
 					</ListItem>
 					<ListItem disablePadding>
 						<ListItemButton component="a">
-							<ListItemIcon>
+							<ListItemIcon sx={{ color: "white" }}>
 								<FavoriteBorderIcon />
 							</ListItemIcon>
 							<ListItemText primary="Liked Songs" />
