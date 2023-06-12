@@ -20,12 +20,15 @@ const CustomGridItem = styled(Grid)({
 });
 
 const CustomCardContent = styled(CardContent)({
-	backgroundColor: "#30475E",
+	backgroundColor: "#262626",
 	color: "white",
 });
 
 const Feed = () => {
-	const [feed, setFeed] = useState([]);
+	// useState to store the data fetched
+	const [feed, setFeed] = useState(null);
+
+	// fetch the feed data when the componenet first mounts
 	useEffect(() => {
 		const feedHandler = async () => {
 			const results = await Search();
@@ -38,45 +41,53 @@ const Feed = () => {
 	}, []);
 
 	return (
-		<Box flex={8} overflow="hidden" sx={{ backgroundColor: "#191919" }}>
+		<Box flex={8} overflow="hidden" sx={{ backgroundColor: "#1D1D1D" }}>
 			<Navbar />
-			<Typography sx={{ margin: "20px" }} variant="h4" color="green">
-				{feed.length > 0 ? feed.albums.items[0].data.name : "no"}
+			<Typography sx={{ margin: "20px" }} variant="h6" color="white">
+				Album
 			</Typography>
 
 			<Grid container flexDirection="row" spacing={2}>
-				{feed.albums.items.map(item => {
-					return (
-						<CustomGridItem
-							item
-							xs={6}
-							md={4}
-							lg={3}
-							justifyContent="center"
-							alignItems="center"
-							display="flex"
-						>
-							<Card
-								sx={{
-									width: "200px",
-									height: "300px",
-								}}
+				{/* check if feed exists and if it does map over the data  */}
+				{feed ? (
+					feed.albums.items.map(item => {
+						return (
+							<CustomGridItem
+								key={item.data.uri}
+								item
+								xs={6}
+								md={4}
+								lg={3}
+								justifyContent="center"
+								alignItems="center"
+								display="flex"
 							>
-								<CardMedia
-									title="album"
-									sx={{ height: "200px" }}
-									image={item.data.coverArt.sources[0].url}
-								/>
-								<CustomCardContent>
-									<Typography variant="h6"> Focus</Typography>
-									<Typography flexWrap={true} variant="body1">
-										{item.data.name}
-									</Typography>
-								</CustomCardContent>
-							</Card>
-						</CustomGridItem>
-					);
-				})}
+								<Card
+									sx={{
+										width: "200px",
+										height: "300px",
+									}}
+								>
+									<CardMedia
+										title="album"
+										sx={{ height: "200px" }}
+										image={item.data.coverArt.sources[0].url}
+									/>
+									<CustomCardContent>
+										<Typography variant="h6">
+											{item.data.artists.items[0].profile.name}
+										</Typography>
+										<Typography flexWrap={true} variant="body2" color="#A7A7A7">
+											{item.data.name}
+										</Typography>
+									</CustomCardContent>
+								</Card>
+							</CustomGridItem>
+						);
+					})
+				) : (
+					<Typography variant="h6">Loading...</Typography>
+				)}
 			</Grid>
 		</Box>
 	);

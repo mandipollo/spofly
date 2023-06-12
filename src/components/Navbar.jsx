@@ -1,19 +1,23 @@
 import React from "react";
-import { AppBar, Button, IconButton, Switch, Toolbar } from "@mui/material";
+import { AppBar, Button, Switch, Toolbar } from "@mui/material";
 import { useTheme } from "@emotion/react";
+import styled, { Styled } from "@emotion/styled";
+
+const CustomAppBar = styled(AppBar)({
+	position: "sticky",
+	display: "flex",
+	justifyContent: "flex-end",
+	flexDirection: "row",
+	overflow: "hidden",
+});
 
 const Navbar = () => {
 	const theme = useTheme();
 
 	return (
-		<AppBar
-			position="sticky"
+		<CustomAppBar
 			sx={{
 				backgroundColor: theme.palette.base.base1,
-				display: "flex",
-				justifyContent: "flex-end",
-				flexDirection: "row",
-				overflow: "hidden",
 			}}
 		>
 			<Toolbar>
@@ -30,7 +34,7 @@ const Navbar = () => {
 					Log In
 				</Button>
 			</Toolbar>
-		</AppBar>
+		</CustomAppBar>
 	);
 };
 
