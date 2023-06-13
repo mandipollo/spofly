@@ -6,6 +6,7 @@ const options = {
 	},
 };
 
+// fetch album data
 const FetchAlbum = async id => {
 	try {
 		const response = await fetch(
@@ -13,7 +14,7 @@ const FetchAlbum = async id => {
 			options
 		);
 		const result = await response.json();
-		console.log(result);
+		return result;
 	} catch (error) {
 		console.error(error);
 	}

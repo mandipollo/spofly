@@ -7,7 +7,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Root from "./pages/Root";
-import Album from "./pages/Album";
+import AlbumPage from "./pages/AlbumPage";
 
 const routes = createBrowserRouter([
 	{
@@ -20,7 +20,7 @@ const routes = createBrowserRouter([
 			},
 			{
 				path: "album/:albumId",
-				element: <Album />,
+				element: <AlbumPage />,
 			},
 		],
 	},

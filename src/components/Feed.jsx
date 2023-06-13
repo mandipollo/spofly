@@ -42,11 +42,6 @@ const Feed = () => {
 		feedHandler();
 	}, []);
 
-	const albumIdHanlder = async uri => {
-		const id = uri.split(":")[2];
-		const albumData = await FetchAlbum(id);
-	};
-
 	return (
 		<Box flex={10} overflow="hidden" sx={{ backgroundColor: "#1D1D1D" }}>
 			{/* <Navbar /> */}
@@ -70,11 +65,12 @@ const Feed = () => {
 								alignItems="center"
 								display="flex"
 							>
-								<Link to={`album/${item.data.uri}`} state={`${item}`}>
+								<Link
+									style={{ textDecoration: "none" }}
+									to={`album/${item.data.uri}`}
+									state={`${item.data.uri.split(":")[2]}`}
+								>
 									<Card
-										onClick={async () => {
-											albumIdHanlder(item.data.uri);
-										}}
 										sx={{
 											width: "200px",
 											height: "290px",
