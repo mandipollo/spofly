@@ -1,16 +1,25 @@
 import React from "react";
 import { AppBar, Button, Switch, Toolbar } from "@mui/material";
 import { useTheme } from "@emotion/react";
-import styled, { Styled } from "@emotion/styled";
+import styled from "@emotion/styled";
 
-const CustomAppBar = styled(AppBar)({
-	position: "sticky",
+const CustomAppBar = styled(AppBar)(({ theme }) => ({
+	position: "fixed",
+	top: 0,
+
+	[theme.breakpoints.up("md")]: {
+		left: "250px",
+		width: `calc(100% - 250px)`,
+	},
+	[theme.breakpoints.down("md")]: {
+		left: 0,
+		width: "100%",
+	},
 	display: "flex",
 	justifyContent: "flex-end",
 	flexDirection: "row",
 	overflow: "hidden",
-});
-
+}));
 const Navbar = () => {
 	const theme = useTheme();
 
