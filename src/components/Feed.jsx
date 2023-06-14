@@ -13,7 +13,6 @@ import styled from "@emotion/styled";
 
 import { useEffect, useState } from "react";
 import Search from "../fetch/Search";
-import FetchAlbum from "../fetch/FetchAlbum";
 
 const CustomGridItem = styled(Grid)({
 	display: "flex",
@@ -49,7 +48,7 @@ const Feed = () => {
 				Album
 			</Typography>
 
-			<Grid container flexDirection="row" spacing={2}>
+			<Grid container flexDirection="row" spacing={2} justifyContent="center">
 				{/* check if feed exists and if it does map over the data  */}
 				{feed ? (
 					feed.albums.items.map(item => {
@@ -57,10 +56,10 @@ const Feed = () => {
 							<CustomGridItem
 								key={item.data.uri}
 								item
-								xs={6}
+								xs={12}
 								sm={4}
-								md={4}
-								lg={3}
+								md="auto"
+								lg="auto"
 								justifyContent="center"
 								alignItems="center"
 								display="flex"
