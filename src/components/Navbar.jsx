@@ -6,6 +6,7 @@ import styled from "@emotion/styled";
 const CustomAppBar = styled(AppBar)(({ theme }) => ({
 	position: "fixed",
 	top: 0,
+	minHeight: 64,
 
 	[theme.breakpoints.up("md")]: {
 		left: "250px",
