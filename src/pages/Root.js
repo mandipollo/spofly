@@ -1,15 +1,16 @@
 import { useNavigation, Outlet } from "react-router-dom";
 
 import { Box } from "@mui/material";
-import Navbar from "../components/Navbar";
+
 import Sidebar from "../components/Sidebar";
+import Player from "../components/Player";
 
 const Root = () => {
 	return (
 		<Box>
-			<Navbar />
 			<Box display="flex" flex="1">
 				<Sidebar />
+				<Player />
 				<Box
 					flex="1"
 					sx={{

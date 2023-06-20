@@ -66,6 +66,7 @@ const Album = props => {
 						display: "flex",
 						flexDirection: "column",
 						backgroundColor: "#7C91A5",
+						minHeight: "100vh",
 					}}
 				>
 					<StyledCard
@@ -98,6 +99,7 @@ const Album = props => {
 								display: "flex",
 								color: "#A7A7A7",
 								backgroundColor: "#1D1D1D",
+								display: { xs: "none", sm: "flex" },
 							}}
 						>
 							{albumData && (
@@ -128,6 +130,7 @@ const Album = props => {
 							flex: 1,
 							display: "flex",
 							background: "linear-gradient(to bottom right, #37404A,#121212)",
+							paddingBottom: "300px",
 						}}
 					>
 						<TableContainer
@@ -188,6 +191,7 @@ const Album = props => {
 						justifyContent: "center",
 						backgroundColor: "#7C91A5",
 						height: "100vh",
+						alignItems: "center",
 					}}
 				>
 					<CircularProgress />

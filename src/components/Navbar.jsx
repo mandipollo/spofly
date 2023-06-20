@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Button, Switch, Toolbar } from "@mui/material";
+import { AppBar, Button, Switch, Toolbar, Box } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 
@@ -25,26 +25,28 @@ const Navbar = () => {
 	const theme = useTheme();
 
 	return (
-		<CustomAppBar
-			sx={{
-				backgroundColor: theme.palette.base.base1,
-			}}
-		>
-			<Toolbar>
-				<Switch></Switch>
-				<Button sx={{ marginRight: 6 }} variant="text">
-					Sign up
-				</Button>
-				<Button
-					size="large"
-					sx={{ borderRadius: 3 }}
-					variant="contained"
-					color="success"
-				>
-					Log In
-				</Button>
-			</Toolbar>
-		</CustomAppBar>
+		<>
+			<CustomAppBar
+				sx={{
+					backgroundColor: theme.palette.base.base1,
+				}}
+			>
+				<Toolbar>
+					<Switch></Switch>
+					<Button sx={{ marginRight: 6 }} variant="text">
+						Sign up
+					</Button>
+					<Button
+						size="large"
+						sx={{ borderRadius: 3 }}
+						variant="contained"
+						color="success"
+					>
+						Log In
+					</Button>
+				</Toolbar>
+			</CustomAppBar>
+		</>
 	);
 };
 

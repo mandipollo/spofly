@@ -39,7 +39,14 @@ const Sidebar = () => {
 						<ListItemButton component="a" disableRipple>
 							<ListItemIcon>
 								<PlayCircleIcon
-									sx={{ width: "60px", height: "60px", color: "white" }}
+									sx={{
+										width: "60px",
+										height: "60px",
+										color: "#1AD760",
+										"&hover": {
+											color: "white",
+										},
+									}}
 								/>
 							</ListItemIcon>
 							<ListItemText
@@ -55,6 +62,12 @@ const Sidebar = () => {
 									<HomeIcon />
 								</ListItemIcon>
 								<ListItemText
+									sx={{
+										color: "#A7A7A7",
+										"&:hover": {
+											color: "white",
+										},
+									}}
 									primary="Home"
 									primaryTypographyProps={{ fontSize: "14px" }}
 								/>
@@ -67,6 +80,12 @@ const Sidebar = () => {
 								<SearchIcon />
 							</ListItemIcon>
 							<ListItemText
+								sx={{
+									color: "#A7A7A7",
+									"&:hover": {
+										color: "white",
+									},
+								}}
 								primary="Search"
 								primaryTypographyProps={{ fontSize: "14px" }}
 							/>
@@ -78,6 +97,12 @@ const Sidebar = () => {
 								<LibraryAddIcon />
 							</ListItemIcon>
 							<ListItemText
+								sx={{
+									color: "#A7A7A7",
+									"&:hover": {
+										color: "white",
+									},
+								}}
 								primary="Library"
 								primaryTypographyProps={{ fontSize: "14px" }}
 							/>
@@ -89,6 +114,12 @@ const Sidebar = () => {
 								<PlaylistAddIcon />
 							</ListItemIcon>
 							<ListItemText
+								sx={{
+									color: "#A7A7A7",
+									"&:hover": {
+										color: "white",
+									},
+								}}
 								primary="Create Playlist"
 								primaryTypographyProps={{ fontSize: "14px" }}
 							/>
@@ -96,10 +127,23 @@ const Sidebar = () => {
 					</ListItem>
 					<ListItem disablePadding>
 						<ListItemButton component="a" disableRipple>
-							<ListItemIcon sx={{ color: "white" }}>
+							<ListItemIcon
+								sx={{
+									color: "#A7A7A7",
+									"&:hover": {
+										color: "white",
+									},
+								}}
+							>
 								<FavoriteBorderIcon />
 							</ListItemIcon>
 							<ListItemText
+								sx={{
+									color: "#A7A7A7",
+									"&:hover": {
+										color: "white",
+									},
+								}}
 								primary="Liked Songs"
 								primaryTypographyProps={{ fontSize: "14px" }}
 							/>
