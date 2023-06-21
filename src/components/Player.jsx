@@ -2,8 +2,12 @@ import H5AudioPlayer from "react-h5-audio-player";
 import { Box } from "@mui/material";
 import "react-h5-audio-player/lib/styles.css";
 import { useTheme } from "@emotion/react";
+import { useSelector } from "react-redux";
 
 const Player = () => {
+	const trackState = useSelector(state => state.playTrack);
+
+	console.log(trackState);
 	const theme = useTheme();
 	return (
 		<Box
@@ -17,7 +21,8 @@ const Player = () => {
 			}}
 		>
 			<H5AudioPlayer
-				src="demo"
+				autoPlay
+				src={trackState}
 				style={{
 					width: "100%",
 					height: "100%",

@@ -49,7 +49,11 @@ const Feed = () => {
 		<Box
 			flex={10}
 			overflow="hidden"
-			sx={{ backgroundColor: "#1D1D1D", height: "auto" }}
+			sx={{
+				backgroundColor: "#1D1D1D",
+				height: "auto",
+				paddingBottom: "200px",
+			}}
 		>
 			{/* <Navbar /> */}
 			<Typography sx={{ margin: "20px" }} variant="h6" color="white">

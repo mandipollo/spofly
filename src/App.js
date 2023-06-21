@@ -1,4 +1,6 @@
 import React from "react";
+import { Provider } from "react-redux";
+import store from "./state/store";
 
 import theme from "./utilities/Theme";
 import { ThemeProvider } from "@emotion/react";
@@ -27,9 +29,11 @@ const routes = createBrowserRouter([
 ]);
 const App = () => {
 	return (
-		<ThemeProvider theme={theme}>
-			<RouterProvider router={routes}></RouterProvider>
-		</ThemeProvider>
+		<Provider store={store}>
+			<ThemeProvider theme={theme}>
+				<RouterProvider router={routes}></RouterProvider>
+			</ThemeProvider>
+		</Provider>
 	);
 };
 

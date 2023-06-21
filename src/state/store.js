@@ -1,5 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import playTrackReducer from "./playTrackSlice";
 
-const store = configureStore({});
+const store = configureStore({
+	reducer: {
+		playTrack: playTrackReducer,
+	},
+});
 
 export default store;

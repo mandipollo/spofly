@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { playTrackReducer, resetTrack } from "../state/playTrackSlice";
+
 import {
 	Box,
 	Card,
@@ -34,6 +37,8 @@ const StyledTableCell = styled(TableCell)({
 	border: "none",
 });
 const Album = props => {
+	const dispatch = useDispatch();
+
 	const [isLoading, setIsLoading] = useState(true);
 	const theme = useTheme();
 	// album id
@@ -58,6 +63,10 @@ const Album = props => {
 		fetchData();
 	}, [data]);
 
+	const handleSelectedTrack = track => {
+		dispatch(resetTrack());
+		dispatch(playTrackReducer(track));
+	};
 	return (
 		<>
 			{!isLoading && albumData ? (
@@ -130,7 +139,7 @@ const Album = props => {
 							flex: 1,
 							display: "flex",
 							background: "linear-gradient(to bottom right, #37404A,#121212)",
-							paddingBottom: "300px",
+							paddingBottom: "200px",
 						}}
 					>
 						<TableContainer
@@ -169,7 +178,10 @@ const Album = props => {
 													}}
 												>
 													<StyledTableCell>{item.track_number}</StyledTableCell>
-													<StyledTableCell align="left">
+													<StyledTableCell
+														onClick={handleSelectedTrack(`${item.preview_url}`)}
+														align="left"
+													>
 														{item.name}
 													</StyledTableCell>
 													<StyledTableCell align="left">
