@@ -64,8 +64,8 @@ const Album = props => {
 	}, [data]);
 
 	const handleSelectedTrack = track => {
-		dispatch(resetTrack());
 		dispatch(playTrackReducer(track));
+		console.log(`clicked`);
 	};
 	return (
 		<>
@@ -179,7 +179,9 @@ const Album = props => {
 												>
 													<StyledTableCell>{item.track_number}</StyledTableCell>
 													<StyledTableCell
-														onClick={handleSelectedTrack(`${item.preview_url}`)}
+														onClick={() =>
+															handleSelectedTrack(`${item.preview_url}`)
+														}
 														align="left"
 													>
 														{item.name}

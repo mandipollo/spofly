@@ -37,7 +37,6 @@ const Feed = () => {
 		const feedHandler = async () => {
 			const results = await Search();
 
-			console.log(results);
 			setFeed(results);
 			setIsLoading(false);
 		};
