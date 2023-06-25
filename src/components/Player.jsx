@@ -9,14 +9,12 @@ const Player = () => {
 	const [song, setSong] = useState();
 	const trackState = useSelector(state => state.playTrack);
 
-	console.log(trackState);
 	const theme = useTheme();
 
 	useEffect(() => {
 		const handleSongs = () => {
 			setSong(trackState);
 		};
-		console.log(trackState);
 		handleSongs();
 	}, [trackState]);
 	return (

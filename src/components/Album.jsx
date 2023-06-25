@@ -35,6 +35,9 @@ const StyledCard = styled(Card)(({ theme }) => ({
 const StyledTableCell = styled(TableCell)({
 	color: "#A7A7A7",
 	border: "none",
+	"&:hover": {
+		cursor: "pointer",
+	},
 });
 const Album = props => {
 	const dispatch = useDispatch();
@@ -65,7 +68,6 @@ const Album = props => {
 
 	const handleSelectedTrack = track => {
 		dispatch(playTrackReducer(track));
-		console.log(`clicked`);
 	};
 	return (
 		<>

@@ -14,12 +14,18 @@ import CircularProgress from "@mui/material/CircularProgress";
 import styled from "@emotion/styled";
 
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { playTrackReducer } from "../state/playTrackSlice";
 import Search from "../fetch/Search";
 
 const CustomGridItem = styled(Grid)({
 	display: "flex",
 	justifyContent: "center",
 	alignItems: "center",
+	justifyContent: "center",
+	alignItems: "center",
+	display: "flex",
+	margin: "10px 0",
 });
 
 const CustomCardContent = styled(CardContent)({
@@ -28,6 +34,7 @@ const CustomCardContent = styled(CardContent)({
 });
 
 const Feed = () => {
+	const dispatch = useDispatch();
 	// useState to store the data fetched
 	const [feed, setFeed] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
@@ -36,7 +43,7 @@ const Feed = () => {
 	useEffect(() => {
 		const feedHandler = async () => {
 			const results = await Search();
-
+			console.log(results);
 			setFeed(results);
 			setIsLoading(false);
 		};
@@ -44,6 +51,11 @@ const Feed = () => {
 		feedHandler();
 	}, []);
 
+	// dispatch the track to the player state
+
+	const handleSelectedTrack = track => {
+		dispatch(playTrackReducer(track));
+	};
 	return (
 		<Box
 			flex={10}
@@ -54,7 +66,6 @@ const Feed = () => {
 				paddingBottom: "200px",
 			}}
 		>
-			{/* <Navbar /> */}
 			<Typography sx={{ margin: "20px" }} variant="h6" color="white">
 				Album
 			</Typography>
@@ -69,52 +80,183 @@ const Feed = () => {
 				{feed && !isLoading ? (
 					feed.albums.items.map(item => {
 						return (
-							<Link
-								style={{ textDecoration: "none" }}
-								to={`album/${item.data.uri}`}
-								state={`${item.data.uri.split(":")[2]}`}
-								key={item.data.uri}
-							>
-								<CustomGridItem
+							<>
+								<Link
+									style={{ textDecoration: "none" }}
+									to={`album/${item.data.uri}`}
+									state={`${item.data.uri.split(":")[2]}`}
 									key={item.data.uri}
-									item
-									xs="auto"
-									sm="auto"
-									md="auto"
-									lg="auto"
-									justifyContent="center"
-									alignItems="center"
-									display="flex"
-									margin="10px 0"
 								>
-									<Card
-										sx={{
-											width: "200px",
-											height: "290px",
-										}}
+									<CustomGridItem key={item.data.uri} item>
+										<Card
+											sx={{
+												width: "200px",
+												height: "290px",
+												backgroundColor: "#262626",
+											}}
+										>
+											<CardMedia
+												title="album"
+												sx={{ height: "200px" }}
+												image={item.data.coverArt.sources[0].url}
+											/>
+											<CustomCardContent>
+												<Typography variant="h6">
+													{item.data.artists.items[0].profile.name}
+												</Typography>
+												<Typography
+													overflow="hidden"
+													textOverflow="ellipsis"
+													whiteSpace="nowrap"
+													variant="body2"
+													color="#A7A7A7"
+												>
+													{item.data.name}
+												</Typography>
+											</CustomCardContent>
+										</Card>
+									</CustomGridItem>
+								</Link>
+							</>
+						);
+					})
+				) : (
+					<Box
+						sx={{
+							backgroundColor: "#1D1D1D",
+							flex: 1,
+							height: "100vh",
+							justifyContent: "center",
+							display: "flex",
+						}}
+					>
+						<CircularProgress />
+					</Box>
+				)}
+			</Grid>
+
+			<Typography sx={{ margin: "20px" }} variant="h6" color="white">
+				Artists
+			</Typography>
+
+			<Grid
+				container
+				flexDirection="row"
+				spacing={1}
+				justifyContent="space-around"
+			>
+				{/* check if feed exists and if it does map over the data  */}
+				{feed && !isLoading ? (
+					feed.artists.items.map(item => {
+						return (
+							<>
+								<Link
+									style={{ textDecoration: "none" }}
+									// to={`album/${item.data.uri}`}
+									// state={`${item.data.uri.split(":")[2]}`}
+									key={item.data.uri}
+								>
+									<CustomGridItem
+										key={item.data.uri}
+										item
+										xs="auto"
+										sm="auto"
+										md="auto"
+										lg="auto"
+										justifyContent="center"
+										alignItems="center"
+										display="flex"
+										margin="10px 0"
 									>
-										<CardMedia
-											title="album"
-											sx={{ height: "200px" }}
-											image={item.data.coverArt.sources[0].url}
-										/>
-										<CustomCardContent>
-											<Typography variant="h6">
-												{item.data.artists.items[0].profile.name}
-											</Typography>
-											<Typography
-												overflow="hidden"
-												textOverflow="ellipsis"
-												whiteSpace="nowrap"
-												variant="body2"
-												color="#A7A7A7"
-											>
-												{item.data.name}
-											</Typography>
-										</CustomCardContent>
-									</Card>
-								</CustomGridItem>
-							</Link>
+										<Card
+											sx={{
+												width: "200px",
+												height: "290px",
+												backgroundColor: "#262626",
+											}}
+										>
+											<CardMedia
+												title="album"
+												sx={{ height: "200px" }}
+												image={item.data.visuals.avatarImage.sources[2].url}
+											/>
+											<CustomCardContent>
+												<Typography variant="h6">
+													{item.data.profile.name}
+												</Typography>
+											</CustomCardContent>
+										</Card>
+									</CustomGridItem>
+								</Link>
+							</>
+						);
+					})
+				) : (
+					<Box
+						sx={{
+							backgroundColor: "#1D1D1D",
+							flex: 1,
+							height: "100vh",
+							justifyContent: "center",
+							display: "flex",
+						}}
+					>
+						<CircularProgress />
+					</Box>
+				)}
+			</Grid>
+			<Typography sx={{ margin: "20px" }} variant="h6" color="white">
+				Tracks
+			</Typography>
+
+			<Grid
+				container
+				flexDirection="row"
+				spacing={1}
+				justifyContent="space-around"
+			>
+				{/* check if feed exists and if it does map over the data  */}
+				{feed && !isLoading ? (
+					feed.tracks.items.map(item => {
+						return (
+							<>
+								<Link
+									style={{ textDecoration: "none" }}
+									// to={`album/${item.data.uri}`}
+									// state={`${item.data.uri.split(":")[2]}`}
+									key={item.data.uri}
+								>
+									<CustomGridItem key={item.data.uri} item>
+										<Card
+											sx={{
+												width: "200px",
+												height: "290px",
+												backgroundColor: "#262626",
+											}}
+										>
+											<CardMedia
+												title="album"
+												sx={{ height: "200px" }}
+												image={item.data.albumOfTrack.coverArt.sources[0].url}
+											/>
+											<CustomCardContent>
+												<Typography variant="h6">
+													{item.data.artists.items[0].profile.name}
+												</Typography>
+												<Typography
+													overflow="hidden"
+													textOverflow="ellipsis"
+													whiteSpace="nowrap"
+													variant="body2"
+													color="#A7A7A7"
+												>
+													{item.data.name}
+												</Typography>
+											</CustomCardContent>
+										</Card>
+									</CustomGridItem>
+								</Link>
+							</>
 						);
 					})
 				) : (
