@@ -25,7 +25,7 @@ const CustomGridItem = styled(Grid)({
 	justifyContent: "center",
 	alignItems: "center",
 	display: "flex",
-	margin: "10px 0",
+	margin: "20px 20px",
 });
 
 const CustomCardContent = styled(CardContent)({
@@ -64,30 +64,26 @@ const Feed = () => {
 				backgroundColor: "#1D1D1D",
 				height: "auto",
 				paddingBottom: "200px",
+				minHeight: "calc(100vh - 60px)",
 			}}
 		>
 			<Typography sx={{ margin: "20px" }} variant="h6" color="white">
 				Album
 			</Typography>
 
-			<Grid
-				container
-				flexDirection="row"
-				spacing={1}
-				justifyContent="space-around"
-			>
+			<Grid container flexDirection="row" spacing={1}>
 				{/* check if feed exists and if it does map over the data  */}
 				{feed && !isLoading ? (
 					feed.albums.items.map(item => {
 						return (
 							<>
-								<Link
-									style={{ textDecoration: "none" }}
-									to={`album/${item.data.uri}`}
-									state={`${item.data.uri.split(":")[2]}`}
-									key={item.data.uri}
-								>
-									<CustomGridItem key={item.data.uri} item>
+								<CustomGridItem key={item.data.uri} item>
+									<Link
+										style={{ textDecoration: "none" }}
+										to={`album/${item.data.uri}`}
+										state={`${item.data.uri.split(":")[2]}`}
+										key={item.data.uri}
+									>
 										<Card
 											sx={{
 												width: "200px",
@@ -115,8 +111,8 @@ const Feed = () => {
 												</Typography>
 											</CustomCardContent>
 										</Card>
-									</CustomGridItem>
-								</Link>
+									</Link>
+								</CustomGridItem>
 							</>
 						);
 					})
@@ -139,34 +135,18 @@ const Feed = () => {
 				Artists
 			</Typography>
 
-			<Grid
-				container
-				flexDirection="row"
-				spacing={1}
-				justifyContent="space-around"
-			>
+			<Grid container flexDirection="row" spacing={1}>
 				{/* check if feed exists and if it does map over the data  */}
 				{feed && !isLoading ? (
 					feed.artists.items.map(item => {
 						return (
 							<>
-								<Link
-									style={{ textDecoration: "none" }}
-									// to={`album/${item.data.uri}`}
-									// state={`${item.data.uri.split(":")[2]}`}
-									key={item.data.uri}
-								>
-									<CustomGridItem
+								<CustomGridItem key={item.data.uri}>
+									<Link
+										style={{ textDecoration: "none" }}
+										to={`artist/${item.data.uri}`}
+										state={`${item.data.uri.split(":")[2]}`}
 										key={item.data.uri}
-										item
-										xs="auto"
-										sm="auto"
-										md="auto"
-										lg="auto"
-										justifyContent="center"
-										alignItems="center"
-										display="flex"
-										margin="10px 0"
 									>
 										<Card
 											sx={{
@@ -186,8 +166,8 @@ const Feed = () => {
 												</Typography>
 											</CustomCardContent>
 										</Card>
-									</CustomGridItem>
-								</Link>
+									</Link>
+								</CustomGridItem>
 							</>
 						);
 					})
@@ -209,24 +189,19 @@ const Feed = () => {
 				Tracks
 			</Typography>
 
-			<Grid
-				container
-				flexDirection="row"
-				spacing={1}
-				justifyContent="space-around"
-			>
+			<Grid container flexDirection="row" spacing={1}>
 				{/* check if feed exists and if it does map over the data  */}
 				{feed && !isLoading ? (
 					feed.tracks.items.map(item => {
 						return (
 							<>
-								<Link
-									style={{ textDecoration: "none" }}
-									// to={`album/${item.data.uri}`}
-									// state={`${item.data.uri.split(":")[2]}`}
-									key={item.data.uri}
-								>
-									<CustomGridItem key={item.data.uri} item>
+								<CustomGridItem key={item.data.uri} item>
+									<Link
+										style={{ textDecoration: "none" }}
+										// to={`album/${item.data.uri}`}
+										// state={`${item.data.uri.split(":")[2]}`}
+										key={item.data.uri}
+									>
 										<Card
 											sx={{
 												width: "200px",
@@ -254,8 +229,8 @@ const Feed = () => {
 												</Typography>
 											</CustomCardContent>
 										</Card>
-									</CustomGridItem>
-								</Link>
+									</Link>
+								</CustomGridItem>
 							</>
 						);
 					})

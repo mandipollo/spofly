@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { playTrackReducer, resetTrack } from "../state/playTrackSlice";
+import { playTrackReducer } from "../state/playTrackSlice";
 
 import {
 	Box,
@@ -21,7 +21,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import styled from "@emotion/styled";
 import FetchAlbum from "../fetch/FetchAlbum";
 import { useTheme } from "@mui/material/styles";
-import formatDuration from "../utilities/FormatTime";
+import ModuleTable from "./Table";
 
 const StyledCard = styled(Card)(({ theme }) => ({
 	display: "flex",
@@ -169,29 +169,37 @@ const Album = props => {
 									<TableBody>
 										{albumData.albums[0].tracks.items.map(item => {
 											return (
-												<TableRow
-													key={item.tracks_number}
-													sx={{
-														border: 0,
-														color: "#A7A7A7",
-														"&:hover": {
-															backgroundColor: "#4B5763",
-														},
-													}}
-												>
-													<StyledTableCell>{item.track_number}</StyledTableCell>
-													<StyledTableCell
-														onClick={() =>
-															handleSelectedTrack(`${item.preview_url}`)
-														}
-														align="left"
-													>
-														{item.name}
-													</StyledTableCell>
-													<StyledTableCell align="left">
-														{formatDuration(item.duration_ms)}
-													</StyledTableCell>
-												</TableRow>
+												<ModuleTable
+													trackId={item.id}
+													trackName={item.name}
+													trackNumber={item.track_number}
+													onClick={handleSelectedTrack}
+													trackDurationMs={item.duration_ms}
+													trackUrl={item.preview_ms}
+												/>
+												// <TableRow
+												// 	key={item.tracks_number}
+												// 	sx={{
+												// 		border: 0,
+												// 		color: "#A7A7A7",
+												// 		"&:hover": {
+												// 			backgroundColor: "#4B5763",
+												// 		},
+												// 	}}
+												// >
+												// 	<StyledTableCell>{item.track_number}</StyledTableCell>
+												// 	<StyledTableCell
+												// 		onClick={() =>
+												// 			handleSelectedTrack(`${item.preview_url}`)
+												// 		}
+												// 		align="left"
+												// 	>
+												// 		{item.name}
+												// 	</StyledTableCell>
+												// 	<StyledTableCell align="left">
+												// 		{formatDuration(item.duration_ms)}
+												// 	</StyledTableCell>
+												// </TableRow>
 											);
 										})}
 									</TableBody>

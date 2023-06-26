@@ -9,7 +9,6 @@ const AlbumPage = () => {
 
 	return (
 		<>
-			<Navbar />
 			<Album data={state} />
 		</>
 	);

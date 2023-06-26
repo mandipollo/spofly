@@ -4,11 +4,13 @@ import { Box } from "@mui/material";
 
 import Sidebar from "../components/Sidebar";
 import Player from "../components/Player";
+import Navbar from "../components/Navbar";
 
 const Root = () => {
 	return (
 		<Box>
 			<Box display="flex" flex="1">
+				<Navbar />
 				<Sidebar />
 				<Player />
 				<Box

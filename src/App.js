@@ -10,6 +10,7 @@ import { RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Root from "./pages/Root";
 import AlbumPage from "./pages/AlbumPage";
+import ArtistPage from "./pages/ArtistPage";
 
 const routes = createBrowserRouter([
 	{
@@ -24,6 +25,7 @@ const routes = createBrowserRouter([
 				path: "album/:albumId",
 				element: <AlbumPage />,
 			},
+			{ path: "artist/:artistId", element: <ArtistPage /> },
 		],
 	},
 ]);
