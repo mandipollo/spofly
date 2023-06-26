@@ -1,4 +1,4 @@
-import { TableRow, TableCell } from "@mui/material";
+import { TableRow, TableCell, Avatar } from "@mui/material";
 
 import React from "react";
 import styled from "@emotion/styled";
@@ -18,6 +18,7 @@ const ModuleTable = ({
 	trackDurationMs,
 	trackName,
 	trackId,
+	albumArt,
 }) => {
 	return (
 		<TableRow
@@ -31,7 +32,13 @@ const ModuleTable = ({
 			}}
 		>
 			<StyledTableCell>{trackNumber}</StyledTableCell>
-			<StyledTableCell onClick={() => `${onClick(`${trackUrl}`)}`} align="left">
+			{albumArt && (
+				<StyledTableCell>
+					<Avatar variant="square" src={albumArt} />
+				</StyledTableCell>
+			)}
+
+			<StyledTableCell onClick={() => onClick(trackUrl)} align="left">
 				{trackName}
 			</StyledTableCell>
 			<StyledTableCell align="left">

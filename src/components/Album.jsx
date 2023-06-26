@@ -4,41 +4,24 @@ import { playTrackReducer } from "../state/playTrackSlice";
 
 import {
 	Box,
-	Card,
 	CardContent,
 	CardMedia,
 	Typography,
 	Paper,
 	Table,
 	TableContainer,
-	TableCell,
 	TableRow,
 	TableHead,
 	TableBody,
 } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import CircularProgress from "@mui/material/CircularProgress";
-import styled from "@emotion/styled";
+import LoadingBox from "./LoadingBox";
+import StyledCard from "./styledComponents/StyledCard";
+import StyledTableCell from "./styledComponents/StyledTableCell";
 import FetchAlbum from "../fetch/FetchAlbum";
 import { useTheme } from "@mui/material/styles";
 import ModuleTable from "./Table";
 
-const StyledCard = styled(Card)(({ theme }) => ({
-	display: "flex",
-	flexDirection: "row",
-	justifyContent: "center",
-	alignItems: "center",
-	color: "white",
-	elevation: 0,
-}));
-
-const StyledTableCell = styled(TableCell)({
-	color: "#A7A7A7",
-	border: "none",
-	"&:hover": {
-		cursor: "pointer",
-	},
-});
 const Album = props => {
 	const dispatch = useDispatch();
 
@@ -157,9 +140,9 @@ const Album = props => {
 							<Table sx={{ width: "90%" }}>
 								<TableHead>
 									<TableRow>
-										<StyledTableCell># </StyledTableCell>
-										<StyledTableCell>Title</StyledTableCell>
-										<StyledTableCell>
+										<StyledTableCell align="middle">#</StyledTableCell>
+										<StyledTableCell align="middle">Title</StyledTableCell>
+										<StyledTableCell align="middle">
 											<AccessTimeIcon />
 										</StyledTableCell>
 									</TableRow>
@@ -175,31 +158,8 @@ const Album = props => {
 													trackNumber={item.track_number}
 													onClick={handleSelectedTrack}
 													trackDurationMs={item.duration_ms}
-													trackUrl={item.preview_ms}
+													trackUrl={item.preview_url}
 												/>
-												// <TableRow
-												// 	key={item.tracks_number}
-												// 	sx={{
-												// 		border: 0,
-												// 		color: "#A7A7A7",
-												// 		"&:hover": {
-												// 			backgroundColor: "#4B5763",
-												// 		},
-												// 	}}
-												// >
-												// 	<StyledTableCell>{item.track_number}</StyledTableCell>
-												// 	<StyledTableCell
-												// 		onClick={() =>
-												// 			handleSelectedTrack(`${item.preview_url}`)
-												// 		}
-												// 		align="left"
-												// 	>
-												// 		{item.name}
-												// 	</StyledTableCell>
-												// 	<StyledTableCell align="left">
-												// 		{formatDuration(item.duration_ms)}
-												// 	</StyledTableCell>
-												// </TableRow>
 											);
 										})}
 									</TableBody>
@@ -209,17 +169,7 @@ const Album = props => {
 					</Box>
 				</Box>
 			) : (
-				<Box
-					sx={{
-						display: "flex",
-						justifyContent: "center",
-						backgroundColor: "#7C91A5",
-						height: "100vh",
-						alignItems: "center",
-					}}
-				>
-					<CircularProgress />
-				</Box>
+				<LoadingBox />
 			)}
 		</>
 	);
