@@ -113,7 +113,7 @@ const Feed = () => {
 						{feed.artists.items.map(item => {
 							return (
 								<>
-									<StyledGridItem key={item.data.uri}>
+									<StyledGridItem key={item.data.uri} item>
 										<Link
 											style={{ textDecoration: "none" }}
 											to={`artist/${item.data.uri}`}

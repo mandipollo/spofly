@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Box, Card, CardContent, Typography, Paper, Grid } from "@mui/material";
+import {
+	Box,
+	Card,
+	CardContent,
+	Typography,
+	Paper,
+	Grid,
+	CardMedia,
+} from "@mui/material";
 import FetchArtistOverview from "../fetch/FetchArtistOverview";
 import LoadingBox from "./LoadingBox";
 import { TableContainer, TableBody, Table, Tabs, Tab } from "@mui/material";
 import TabPanel from "./TabPanel";
 import StyledTab from "./styledComponents/StyledTab";
 import GridLayout from "./layouts/GridLayout";
-
+import removeAnchorTags from "../utilities/removeAnchorTags";
 import ModuleTable from "./Table";
 
 // fetch and display artist overview
@@ -97,6 +105,7 @@ const Artist = props => {
 										item => {
 											return (
 												<ModuleTable
+													key={item.track.id}
 													albumArt={item.track.album.coverArt.sources[0].url}
 													trackId={item.track.id}
 													trackName={item.track.name}
@@ -117,7 +126,7 @@ const Artist = props => {
 					<Typography sx={{ margin: "20px" }} variant="h6" color="white">
 						Discography
 					</Typography>
-					<Box sx={{ borderBottom: 1, borderColor: "divider", color: "white" }}>
+					<Box sx={{ color: "white" }}>
 						<Tabs
 							value={selectedTab}
 							onChange={handleChange}
@@ -139,6 +148,9 @@ const Artist = props => {
 									item => {
 										return (
 											<GridLayout
+												key={item.releases.items[0].uri}
+												itemRoute={`/album/${item.releases.items[0].uri}`}
+												itemState={item.releases.items[0].uri.split(":")[2]}
 												itemId={item.releases.items[0].id}
 												itemCoverArt={
 													item.releases.items[0].coverArt.sources[0].url
@@ -156,6 +168,7 @@ const Artist = props => {
 									item => {
 										return (
 											<GridLayout
+												key={item.releases.items[0].id}
 												itemId={item.releases.items[0].id}
 												itemCoverArt={
 													item.releases.items[0].coverArt.sources[0].url
@@ -173,6 +186,7 @@ const Artist = props => {
 									item => {
 										return (
 											<GridLayout
+												key={item.releases.items[0].id}
 												itemId={item.releases.items[0].id}
 												itemCoverArt={
 													item.releases.items[0].coverArt.sources[0].url
@@ -184,6 +198,94 @@ const Artist = props => {
 								)}
 							</Grid>
 						</TabPanel>
+					</Box>
+					<Typography sx={{ margin: "20px" }} variant="h6" color="white">
+						Featuring {artistOverview.data.artist.profile.name}
+					</Typography>
+					<Box>
+						<Grid container flexDirection="row" spacing={1}>
+							{artistOverview.data.artist.relatedContent.featuring.items.map(
+								item => {
+									return (
+										<GridLayout
+											key={item.id}
+											itemId={item.id}
+											itemCoverArt={item.images.items[0].sources[0].url}
+											itemProfileName={item.name}
+										/>
+									);
+								}
+							)}
+						</Grid>
+					</Box>
+
+					<Typography sx={{ margin: "20px" }} variant="h6" color="white">
+						About
+					</Typography>
+					<Box>
+						<Grid
+							container
+							flexDirection="row"
+							spacing={1}
+							justifyContent="center"
+							alignItems="center"
+						>
+							<Paper
+								square
+								elevation={4}
+								sx={{
+									justifyContent: "center",
+									alignItems: "center",
+									display: "flex",
+									backgroundColor: "inherit",
+								}}
+							>
+								<Card
+									sx={{
+										display: "flex",
+										flexDirection: "column",
+										justifyContent: "space-between",
+										width: "90%",
+										color: "white",
+										backgroundColor: "inherit",
+									}}
+								>
+									<CardMedia
+										title="artist"
+										sx={{
+											height: {
+												xs: "200px",
+												sm: "200px",
+												md: "400px",
+												lg: "600px",
+												xl: "800px",
+											},
+											width: "100%",
+										}}
+										image={
+											artistOverview.data.artist.visuals.gallery.items[0]
+												.sources[0].url
+										}
+									/>
+
+									<CardContent>
+										<Typography gutterBottom variant="h2" component="div">
+											{artistOverview.data.artist.profile.name}
+										</Typography>
+
+										<Typography color="white" variant="body1">
+											{artistOverview.data.artist.stats.monthlyListeners.toLocaleString()}{" "}
+											monthly listeneres
+										</Typography>
+										<Typography color="white" variant="body1">
+											{removeAnchorTags(
+												`${artistOverview.data.artist.profile.biography.text}`
+											)}
+										</Typography>
+									</CardContent>
+								</Card>
+							</Paper>
+						</Grid>
 					</Box>
 				</>
 			)}

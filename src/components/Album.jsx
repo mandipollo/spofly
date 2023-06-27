@@ -142,9 +142,9 @@ const Album = props => {
 							<Table sx={{ width: "90%" }}>
 								<TableHead>
 									<TableRow>
-										<StyledTableCell align="middle">#</StyledTableCell>
-										<StyledTableCell align="middle">Title</StyledTableCell>
-										<StyledTableCell align="middle">
+										<StyledTableCell align="left">#</StyledTableCell>
+										<StyledTableCell align="left">Title</StyledTableCell>
+										<StyledTableCell align="left">
 											<AccessTimeIcon />
 										</StyledTableCell>
 									</TableRow>
