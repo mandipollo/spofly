@@ -63,7 +63,7 @@ const Feed = () => {
 					<Grid container flexDirection="row" spacing={1}>
 						{feed.albums.items.map(item => {
 							return (
-								<>
+								<React.Fragment key={item.data.uri}>
 									<StyledGridItem key={item.data.uri} item>
 										<Link
 											style={{ textDecoration: "none" }}
@@ -100,7 +100,7 @@ const Feed = () => {
 											</Card>
 										</Link>
 									</StyledGridItem>
-								</>
+								</React.Fragment>
 							);
 						})}
 					</Grid>
@@ -112,8 +112,8 @@ const Feed = () => {
 					<Grid container flexDirection="row" spacing={1}>
 						{feed.artists.items.map(item => {
 							return (
-								<>
-									<StyledGridItem key={item.data.uri} item>
+								<React.Fragment key={item.data.uri}>
+									<StyledGridItem key={`artist${item.data.uri}`}>
 										<Link
 											style={{ textDecoration: "none" }}
 											to={`artist/${item.data.uri}`}
@@ -140,7 +140,7 @@ const Feed = () => {
 											</Card>
 										</Link>
 									</StyledGridItem>
-								</>
+								</React.Fragment>
 							);
 						})}
 					</Grid>
@@ -151,8 +151,8 @@ const Feed = () => {
 					<Grid container flexDirection="row" spacing={1}>
 						{feed.tracks.items.map(item => {
 							return (
-								<>
-									<StyledGridItem key={item.data.uri} item>
+								<React.Fragment key={item.data.uri}>
+									<StyledGridItem key={`track${item.data.uri}`} item>
 										<Link
 											style={{ textDecoration: "none" }}
 											// to={`album/${item.data.uri}`}
@@ -188,7 +188,7 @@ const Feed = () => {
 											</Card>
 										</Link>
 									</StyledGridItem>
-								</>
+								</React.Fragment>
 							);
 						})}
 					</Grid>

@@ -152,9 +152,11 @@ const Album = props => {
 
 								{albumData && (
 									<TableBody>
-										{albumData.albums[0].tracks.items.map(item => {
+										{albumData.albums[0].tracks.items.map((item, index) => {
 											return (
 												<ModuleTable
+													key={`${item.id}-${index}`}
+													index={index}
 													trackId={item.id}
 													trackName={item.name}
 													trackNumber={item.track_number}

@@ -19,10 +19,11 @@ const ModuleTable = ({
 	trackName,
 	trackId,
 	albumArt,
+	index,
 }) => {
 	return (
 		<TableRow
-			key={trackId}
+			key={trackId - index}
 			sx={{
 				border: 0,
 				color: "#A7A7A7",
