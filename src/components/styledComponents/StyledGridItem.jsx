@@ -8,7 +8,7 @@ const StyledGridItem = styled(Grid)({
 	justifyContent: "center",
 	alignItems: "center",
 	display: "flex",
-	margin: "20px 20px",
+	margin: "20px 10px",
 });
 
 export default StyledGridItem;

@@ -5,6 +5,7 @@ import LoadingBox from "./LoadingBox";
 import { TableContainer, TableBody, Table, Tabs, Tab } from "@mui/material";
 import TabPanel from "./TabPanel";
 import StyledTab from "./styledComponents/StyledTab";
+import GridLayout from "./layouts/GridLayout";
 
 import ModuleTable from "./Table";
 
@@ -129,60 +130,59 @@ const Artist = props => {
 						>
 							<StyledTab label="Albums" />
 							<StyledTab label="Singles" />
-							<StyledTab label="Concerts" />
+							<StyledTab label="Compilations" />
 						</Tabs>
 
 						<TabPanel value={selectedTab} index={0}>
 							<Grid container flexDirection="row" spacing={1}>
-								{/* {feed.albums.items.map(item => {
-									return (
-										<>
-											<StyledGridItem key={item.data.uri} item>
-												<Link
-													style={{ textDecoration: "none" }}
-													to={`album/${item.data.uri}`}
-													state={`${item.data.uri.split(":")[2]}`}
-													key={item.data.uri}
-												>
-													<Card
-														sx={{
-															width: "200px",
-															height: "290px",
-															backgroundColor: "#262626",
-														}}
-													>
-														<CardMedia
-															title="album"
-															sx={{ height: "200px" }}
-															image={item.data.coverArt.sources[0].url}
-														/>
-														<CustomCardContent>
-															<Typography variant="h6">
-																{item.data.artists.items[0].profile.name}
-															</Typography>
-															<Typography
-																overflow="hidden"
-																textOverflow="ellipsis"
-																whiteSpace="nowrap"
-																variant="body2"
-																color="#A7A7A7"
-															>
-																{item.data.name}
-															</Typography>
-														</CustomCardContent>
-													</Card>
-												</Link>
-											</StyledGridItem>
-										</>
-									);
-								})} */}
+								{artistOverview.data.artist.discography.albums.items.map(
+									item => {
+										return (
+											<GridLayout
+												itemId={item.releases.items[0].id}
+												itemCoverArt={
+													item.releases.items[0].coverArt.sources[0].url
+												}
+												itemProfileName={item.releases.items[0].name}
+											/>
+										);
+									}
+								)}
 							</Grid>
 						</TabPanel>
 						<TabPanel value={selectedTab} index={1}>
-							tab2
+							<Grid container flexDirection="row" spacing={1}>
+								{artistOverview.data.artist.discography.singles.items.map(
+									item => {
+										return (
+											<GridLayout
+												itemId={item.releases.items[0].id}
+												itemCoverArt={
+													item.releases.items[0].coverArt.sources[0].url
+												}
+												itemProfileName={item.releases.items[0].name}
+											/>
+										);
+									}
+								)}
+							</Grid>
 						</TabPanel>
 						<TabPanel value={selectedTab} index={2}>
-							tab3
+							<Grid container flexDirection="row" spacing={1}>
+								{artistOverview.data.artist.discography.compilations.items.map(
+									item => {
+										return (
+											<GridLayout
+												itemId={item.releases.items[0].id}
+												itemCoverArt={
+													item.releases.items[0].coverArt.sources[0].url
+												}
+												itemProfileName={item.releases.items[0].name}
+											/>
+										);
+									}
+								)}
+							</Grid>
 						</TabPanel>
 					</Box>
 				</>

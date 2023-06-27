@@ -50,7 +50,9 @@ const Album = props => {
 	}, [data]);
 
 	const handleSelectedTrack = track => {
-		dispatch(playTrackReducer(track));
+		if (track) {
+			dispatch(playTrackReducer(track));
+		}
 	};
 	return (
 		<>
