@@ -35,7 +35,7 @@ const Sidebar = () => {
 		>
 			<Box>
 				<List>
-					<ListItem disablePadding>
+					{/* <ListItem disablePadding>
 						<ListItemButton component="a" disableRipple>
 							<ListItemIcon>
 								<PlayCircleIcon
@@ -54,7 +54,7 @@ const Sidebar = () => {
 								primaryTypographyProps={{ fontSize: "30px" }}
 							/>
 						</ListItemButton>
-					</ListItem>
+					</ListItem> */}
 					<Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
 						<ListItem disablePadding>
 							<ListItemButton component="a" disableRipple>

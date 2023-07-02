@@ -11,6 +11,7 @@ import HomePage from "./pages/HomePage";
 import Root from "./pages/Root";
 import AlbumPage from "./pages/AlbumPage";
 import ArtistPage from "./pages/ArtistPage";
+import PlaylistPage from "./pages/PlaylistPage";
 
 const routes = createBrowserRouter([
 	{
@@ -26,6 +27,10 @@ const routes = createBrowserRouter([
 				element: <AlbumPage />,
 			},
 			{ path: "artist/:artistId", element: <ArtistPage /> },
+			{
+				path: "playlist/:playlistId",
+				element: <PlaylistPage />,
+			},
 		],
 	},
 ]);

@@ -113,7 +113,7 @@ const Feed = () => {
 						{feed.artists.items.map(item => {
 							return (
 								<React.Fragment key={item.data.uri}>
-									<StyledGridItem key={`artist${item.data.uri}`}>
+									<StyledGridItem key={`artist${item.data.uri}`} item>
 										<Link
 											style={{ textDecoration: "none" }}
 											to={`artist/${item.data.uri}`}
@@ -145,18 +145,18 @@ const Feed = () => {
 						})}
 					</Grid>
 					<Typography sx={{ margin: "20px" }} variant="h6" color="white">
-						Tracks
+						Playlist
 					</Typography>
 
 					<Grid container flexDirection="row" spacing={1}>
-						{feed.tracks.items.map(item => {
+						{feed.playlists.items.map(item => {
 							return (
 								<React.Fragment key={item.data.uri}>
 									<StyledGridItem key={`track${item.data.uri}`} item>
 										<Link
 											style={{ textDecoration: "none" }}
-											// to={`album/${item.data.uri}`}
-											// state={`${item.data.uri.split(":")[2]}`}
+											to={`/playlist/${item.data.uri}`}
+											state={`${item.data.uri.split(":")[2]}`}
 											key={item.data.uri}
 										>
 											<Card
@@ -169,12 +169,10 @@ const Feed = () => {
 												<CardMedia
 													title="album"
 													sx={{ height: "200px" }}
-													image={item.data.albumOfTrack.coverArt.sources[0].url}
+													image={item.data.images.items[0].sources[0].url}
 												/>
 												<StyledCardContent>
-													<Typography variant="h6">
-														{item.data.artists.items[0].profile.name}
-													</Typography>
+													<Typography variant="h6">{item.data.name}</Typography>
 													<Typography
 														overflow="hidden"
 														textOverflow="ellipsis"
@@ -182,7 +180,7 @@ const Feed = () => {
 														variant="body2"
 														color="#A7A7A7"
 													>
-														{item.data.name}
+														{item.data.description}
 													</Typography>
 												</StyledCardContent>
 											</Card>
