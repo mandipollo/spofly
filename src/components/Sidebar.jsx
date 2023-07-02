@@ -35,26 +35,6 @@ const Sidebar = () => {
 		>
 			<Box>
 				<List>
-					{/* <ListItem disablePadding>
-						<ListItemButton component="a" disableRipple>
-							<ListItemIcon>
-								<PlayCircleIcon
-									sx={{
-										width: "60px",
-										height: "60px",
-										color: "#1AD760",
-										"&hover": {
-											color: "white",
-										},
-									}}
-								/>
-							</ListItemIcon>
-							<ListItemText
-								primary="Spofly"
-								primaryTypographyProps={{ fontSize: "30px" }}
-							/>
-						</ListItemButton>
-					</ListItem> */}
 					<Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
 						<ListItem disablePadding>
 							<ListItemButton component="a" disableRipple>

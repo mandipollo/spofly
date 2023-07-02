@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 
 import styled from "@emotion/styled";
+import Variants from "./layouts/Skeleton";
 
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -20,6 +21,7 @@ import StyledGridItem from "./styledComponents/StyledGridItem";
 import StyledCardContent from "./styledComponents/StyledCardContent";
 
 const Feed = () => {
+	const skeletonArray = Array.from({ length: 10 });
 	const dispatch = useDispatch();
 	// useState to store the data fetched
 	const [feed, setFeed] = useState(null);
@@ -53,13 +55,11 @@ const Feed = () => {
 				minHeight: "calc(100vh - 60px)",
 			}}
 		>
-			{/* check if feed exists and if it does map over the data  */}
 			{feed && !isLoading ? (
 				<>
 					<Typography sx={{ margin: "20px" }} variant="h6" color="white">
 						Album
 					</Typography>
-
 					<Grid container flexDirection="row" spacing={1}>
 						{feed.albums.items.map(item => {
 							return (
@@ -84,7 +84,12 @@ const Feed = () => {
 													image={item.data.coverArt.sources[0].url}
 												/>
 												<StyledCardContent>
-													<Typography variant="h6">
+													<Typography
+														overflow="hidden"
+														textOverflow="ellipsis"
+														whiteSpace="nowrap"
+														variant="h6"
+													>
 														{item.data.artists.items[0].profile.name}
 													</Typography>
 													<Typography
@@ -104,11 +109,10 @@ const Feed = () => {
 							);
 						})}
 					</Grid>
-
+					)
 					<Typography sx={{ margin: "20px" }} variant="h6" color="white">
 						Artists
 					</Typography>
-
 					<Grid container flexDirection="row" spacing={1}>
 						{feed.artists.items.map(item => {
 							return (
@@ -147,7 +151,6 @@ const Feed = () => {
 					<Typography sx={{ margin: "20px" }} variant="h6" color="white">
 						Playlist
 					</Typography>
-
 					<Grid container flexDirection="row" spacing={1}>
 						{feed.playlists.items.map(item => {
 							return (
@@ -172,7 +175,14 @@ const Feed = () => {
 													image={item.data.images.items[0].sources[0].url}
 												/>
 												<StyledCardContent>
-													<Typography variant="h6">{item.data.name}</Typography>
+													<Typography
+														overflow="hidden"
+														textOverflow="ellipsis"
+														whiteSpace="nowrap"
+														variant="h6"
+													>
+														{item.data.name}
+													</Typography>
 													<Typography
 														overflow="hidden"
 														textOverflow="ellipsis"
@@ -192,7 +202,15 @@ const Feed = () => {
 					</Grid>
 				</>
 			) : (
-				<LoadingBox />
+				<Grid container flexDirection="row" spacing={1} wrap="wrap">
+					{skeletonArray.map((_, index) => {
+						return (
+							<StyledGridItem key={index} item>
+								<Variants />
+							</StyledGridItem>
+						);
+					})}
+				</Grid>
 			)}
 		</Box>
 	);
