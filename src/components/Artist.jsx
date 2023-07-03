@@ -9,13 +9,13 @@ import {
 	CardMedia,
 } from "@mui/material";
 import FetchArtistOverview from "../fetch/FetchArtistOverview";
-import LoadingBox from "./LoadingBox";
 import { TableContainer, TableBody, Table, Tabs, Tab } from "@mui/material";
 import TabPanel from "./TabPanel";
 import StyledTab from "./styledComponents/StyledTab";
 import GridLayout from "./layouts/GridLayout";
 import removeAnchorTags from "../utilities/removeAnchorTags";
 import ModuleTable from "./Table";
+import SkeletonArtist from "./layouts/SkeletonArtist";
 
 // fetch and display artist overview
 const Artist = props => {
@@ -28,6 +28,7 @@ const Artist = props => {
 
 	// store artist data
 	const [artistOverview, setArtistOverview] = useState(null);
+	const [isLoading, setIsLoading] = useState(true);
 	const artistId = props.data;
 
 	useEffect(() => {
@@ -35,6 +36,7 @@ const Artist = props => {
 			const response = await FetchArtistOverview(artistId);
 			console.log(response);
 			setArtistOverview(response);
+			setIsLoading(false);
 		};
 
 		fetchData();
@@ -49,7 +51,7 @@ const Artist = props => {
 				paddingBottom: "300px",
 			}}
 		>
-			{artistOverview && (
+			{artistOverview && !isLoading ? (
 				<>
 					<Paper square elevation={4}>
 						<Card
@@ -288,6 +290,8 @@ const Artist = props => {
 						</Grid>
 					</Box>
 				</>
+			) : (
+				<SkeletonArtist />
 			)}
 		</Box>
 	);

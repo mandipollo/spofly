@@ -9,18 +9,17 @@ import {
 	Grid,
 } from "@mui/material";
 
-import styled from "@emotion/styled";
 import Variants from "./layouts/Skeleton";
 
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { playTrackReducer } from "../state/playTrackSlice";
 import Search from "../fetch/Search";
-import LoadingBox from "./LoadingBox";
 import StyledGridItem from "./styledComponents/StyledGridItem";
 import StyledCardContent from "./styledComponents/StyledCardContent";
 
 const Feed = () => {
+	// array for skeleton
 	const skeletonArray = Array.from({ length: 10 });
 	const dispatch = useDispatch();
 	// useState to store the data fetched
@@ -202,7 +201,13 @@ const Feed = () => {
 					</Grid>
 				</>
 			) : (
-				<Grid container flexDirection="row" spacing={1} wrap="wrap">
+				<Grid
+					container
+					flexDirection="row"
+					spacing={1}
+					wrap="wrap"
+					paddingTop={3}
+				>
 					{skeletonArray.map((_, index) => {
 						return (
 							<StyledGridItem key={index} item>

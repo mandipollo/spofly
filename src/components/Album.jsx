@@ -13,15 +13,16 @@ import {
 	TableRow,
 	TableHead,
 	TableBody,
+	Skeleton,
 } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import LoadingBox from "./LoadingBox";
+
 import StyledCard from "./styledComponents/StyledCard";
 import StyledTableCell from "./styledComponents/StyledTableCell";
 import FetchAlbum from "../fetch/FetchAlbum";
 import { useTheme } from "@mui/material/styles";
 import ModuleTable from "./Table";
-
+import SkeletonAlbum from "./layouts/SkeletonAlbum";
 const Album = props => {
 	const dispatch = useDispatch();
 
@@ -55,16 +56,16 @@ const Album = props => {
 		}
 	};
 	return (
-		<>
-			{!isLoading && albumData ? (
-				<Box
-					sx={{
-						display: "flex",
-						flexDirection: "column",
-						backgroundColor: "#7C91A5",
-						minHeight: "100vh",
-					}}
-				>
+		<Box
+			sx={{
+				display: "flex",
+				flexDirection: "column",
+				backgroundColor: "#7C91A5",
+				minHeight: "100vh",
+			}}
+		>
+			{albumData && !isLoading ? (
+				<>
 					<StyledCard
 						theme={theme}
 						sx={{
@@ -171,11 +172,11 @@ const Album = props => {
 							</Table>
 						</TableContainer>
 					</Box>
-				</Box>
+				</>
 			) : (
-				<LoadingBox />
+				<SkeletonAlbum />
 			)}
-		</>
+		</Box>
 	);
 };
 
