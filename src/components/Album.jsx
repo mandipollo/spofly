@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { playTrackReducer } from "../state/playTrackSlice";
 
 import {
@@ -14,6 +15,8 @@ import {
 	TableHead,
 	TableBody,
 	Skeleton,
+	Avatar,
+	Stack,
 } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
@@ -116,6 +119,21 @@ const Album = props => {
 									<Typography variant="body2">
 										{albumData.albums[0].tracks.items.length} Tracks
 									</Typography>
+
+									<Avatar
+										variant="circle"
+										src={albumData.albums[0].images[2].url}
+									/>
+
+									<Link
+										style={{ textDecoration: "none", color: "white" }}
+										to={`/artist/${albumData.albums[0].artists[0].uri}`}
+										state={`${albumData.albums[0].artists[0].id}`}
+									>
+										<Typography variant="h6">
+											{albumData.albums[0].artists[0].name}
+										</Typography>
+									</Link>
 								</CardContent>
 							)}
 						</Paper>
