@@ -12,6 +12,7 @@ import Root from "./pages/Root";
 import AlbumPage from "./pages/AlbumPage";
 import ArtistPage from "./pages/ArtistPage";
 import PlaylistPage from "./pages/PlaylistPage";
+import SearchPage from "./pages/SearchPage";
 
 const routes = createBrowserRouter([
 	{
@@ -30,6 +31,10 @@ const routes = createBrowserRouter([
 			{
 				path: "playlist/:playlistId",
 				element: <PlaylistPage />,
+			},
+			{
+				path: "search",
+				element: <SearchPage />,
 			},
 		],
 	},

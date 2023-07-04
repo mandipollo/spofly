@@ -9,7 +9,6 @@ import {
 	ListItemText,
 } from "@mui/material";
 
-import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
@@ -37,7 +36,7 @@ const Sidebar = () => {
 				<List>
 					<Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
 						<ListItem disablePadding>
-							<ListItemButton component="a" disableRipple>
+							<ListItemButton disableRipple>
 								<ListItemIcon sx={{ color: "white" }}>
 									<HomeIcon />
 								</ListItemIcon>
@@ -54,23 +53,28 @@ const Sidebar = () => {
 							</ListItemButton>
 						</ListItem>
 					</Link>
-					<ListItem disablePadding>
-						<ListItemButton component="a" disableRipple>
-							<ListItemIcon sx={{ color: "white" }}>
-								<SearchIcon />
-							</ListItemIcon>
-							<ListItemText
-								sx={{
-									color: "#A7A7A7",
-									"&:hover": {
-										color: "white",
-									},
-								}}
-								primary="Search"
-								primaryTypographyProps={{ fontSize: "14px" }}
-							/>
-						</ListItemButton>
-					</ListItem>
+					<Link
+						to="/search"
+						style={{ textDecoration: "none", color: "inherit" }}
+					>
+						<ListItem disablePadding>
+							<ListItemButton disableRipple>
+								<ListItemIcon sx={{ color: "white" }}>
+									<SearchIcon />
+								</ListItemIcon>
+								<ListItemText
+									sx={{
+										color: "#A7A7A7",
+										"&:hover": {
+											color: "white",
+										},
+									}}
+									primary="Search"
+									primaryTypographyProps={{ fontSize: "14px" }}
+								/>
+							</ListItemButton>
+						</ListItem>
+					</Link>
 					<ListItem disablePadding>
 						<ListItemButton component="a" disableRipple>
 							<ListItemIcon sx={{ color: "white" }}>

@@ -66,16 +66,13 @@ const SkeletonArtist = () => {
 				}}
 			>
 				<Table sx={{ width: "90%" }}>
-					<TableBody>
-						<Table sx={{ width: "90%" }}>
-							<TableHead>
-								<TableRow>
-									<StyledTableCell align="left">#</StyledTableCell>
-									<StyledTableCell align="left">Title</StyledTableCell>
-								</TableRow>
-							</TableHead>
-						</Table>
-					</TableBody>
+					<TableHead>
+						<TableRow>
+							<StyledTableCell align="left">#</StyledTableCell>
+							<StyledTableCell align="left">Title</StyledTableCell>
+						</TableRow>
+					</TableHead>
+					<TableBody></TableBody>
 				</Table>
 			</TableContainer>
 
@@ -83,7 +80,7 @@ const SkeletonArtist = () => {
 				Discography
 			</Typography>
 			<Box sx={{ color: "white" }}>
-				<Tabs
+				{/* <Tabs
 					aria-label="basic tabs example"
 					TabIndicatorProps={{
 						style: {
@@ -94,7 +91,7 @@ const SkeletonArtist = () => {
 					<StyledTab label="Albums" />
 					<StyledTab label="Singles" />
 					<StyledTab label="Compilations" />
-				</Tabs>
+				</Tabs> */}
 
 				<Skeleton variant="rectangular" width={300} height={300} />
 			</Box>

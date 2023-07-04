@@ -2,15 +2,16 @@ import React from "react";
 import {
 	AppBar,
 	Button,
-	Switch,
-	Toolbar,
 	Box,
-	Icon,
 	Typography,
+	TextField,
+	InputAdornment,
 } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
+import { useLocation } from "react-router-dom";
+import SearchIcon from "@mui/icons-material/Search";
 
 const CustomAppBar = styled(AppBar)(({ theme }) => ({
 	position: "fixed",
@@ -32,6 +33,8 @@ const CustomAppBar = styled(AppBar)(({ theme }) => ({
 }));
 const Navbar = () => {
 	const theme = useTheme();
+	const location = useLocation();
+	const pathname = location.pathname;
 
 	return (
 		<>
@@ -40,26 +43,74 @@ const Navbar = () => {
 					backgroundColor: theme.palette.base.base1,
 				}}
 			>
-				<Box
-					sx={{
-						justifyContent: "flex-start",
-						alignItems: "center",
-						display: "flex",
-						flex: 6,
-						margin: "0 10px",
-					}}
-				>
-					<PauseCircleOutlineIcon
+				{pathname === "/search" ? (
+					<Box
 						sx={{
-							display: { xs: "none", sm: "block" },
-							color: "green",
-							m: "0 10px",
+							justifyContent: "center",
+							alignItems: "center",
+							display: "flex",
+							flex: 6,
+							margin: "0 10px",
 						}}
-					/>
-					<Typography variant="h6" color="green" justifySelf="flex-start">
-						Musbrary
-					</Typography>
-				</Box>
+					>
+						<TextField
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position="start">
+										<SearchIcon sx={{ color: "#D8D8D8" }} />
+									</InputAdornment>
+								),
+							}}
+							size="small"
+							variant="outlined"
+							placeholder="artist, album, tracks ?"
+							sx={{
+								width: "70%",
+								"& .MuiOutlinedInput-root": {
+									// Customizing the input element
+									color: "#757575",
+									borderRadius: "1rem",
+									outline: "none",
+									backgroundColor: "#242424",
+									border: "1px solid #242424 ",
+									"&:hover": {
+										backgroundColor: "#242424",
+										outline: "0.1px solid gray",
+									},
+									"&.Mui-focused": {
+										backgroundColor: "#242424",
+										border: "1px solid white",
+									},
+									"& fieldset": {
+										border: "none",
+									},
+								},
+							}}
+						/>
+					</Box>
+				) : (
+					<Box
+						sx={{
+							justifyContent: "flex-start",
+							alignItems: "center",
+							display: "flex",
+							flex: 6,
+							margin: "0 10px",
+						}}
+					>
+						<PauseCircleOutlineIcon
+							sx={{
+								display: { xs: "none", sm: "block" },
+								color: "green",
+								m: "0 10px",
+							}}
+						/>
+						<Typography variant="h6" color="green" justifySelf="flex-start">
+							Musbrary
+						</Typography>
+					</Box>
+				)}
+
 				<Box
 					sx={{
 						alignItems: "center",
@@ -68,7 +119,6 @@ const Navbar = () => {
 						flex: 6,
 					}}
 				>
-					<Switch></Switch>
 					<Button sx={{ marginRight: 6 }} variant="text">
 						Sign up
 					</Button>

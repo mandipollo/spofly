@@ -8,21 +8,24 @@ import {
 	Grid,
 	CardMedia,
 } from "@mui/material";
+import { useDispatch } from "react-redux";
 import FetchArtistOverview from "../fetch/FetchArtistOverview";
-import { TableContainer, TableBody, Table, Tabs, Tab } from "@mui/material";
+import { TableContainer, TableBody, Table, Tabs } from "@mui/material";
 import TabPanel from "./TabPanel";
 import StyledTab from "./styledComponents/StyledTab";
 import GridLayout from "./layouts/GridLayout";
 import removeAnchorTags from "../utilities/removeAnchorTags";
 import ModuleTable from "./Table";
 import SkeletonArtist from "./layouts/SkeletonArtist";
+import { playTrackReducer } from "../state/playTrackSlice";
 
 // fetch and display artist overview
 const Artist = props => {
+	const dispatch = useDispatch();
 	// store tab index
 	const [selectedTab, setSelectedTab] = useState(0);
 
-	const handleChange = (value, index) => {
+	const handleChange = (newValue, index) => {
 		setSelectedTab(index);
 	};
 
@@ -41,6 +44,10 @@ const Artist = props => {
 
 		fetchData();
 	}, [artistId]);
+
+	const handleTrack = track => {
+		dispatch(playTrackReducer(track));
+	};
 	return (
 		<Box
 			sx={{
@@ -116,6 +123,7 @@ const Artist = props => {
 														item.track.duration.totalMilliseconds
 													}
 													trackUrl={item.preview_url}
+													onClick={handleTrack}
 												/>
 											);
 										}
@@ -170,6 +178,8 @@ const Artist = props => {
 									item => {
 										return (
 											<GridLayout
+												itemRoute={`/album/${item.releases.items[0].uri}`}
+												itemState={item.releases.items[0].uri.split(":")[2]}
 												key={item.releases.items[0].id}
 												itemId={item.releases.items[0].id}
 												itemCoverArt={
@@ -188,6 +198,8 @@ const Artist = props => {
 									item => {
 										return (
 											<GridLayout
+												itemRoute={`/album/${item.releases.items[0].uri}`}
+												itemState={item.releases.items[0].uri.split(":")[2]}
 												key={item.releases.items[0].id}
 												itemId={item.releases.items[0].id}
 												itemCoverArt={

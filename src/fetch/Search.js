@@ -1,5 +1,3 @@
-const url =
-	"https://spotify23.p.rapidapi.com/search/?q=top&type=multi&offset=0&limit=10&numberOfTopResults=5";
 const options = {
 	method: "GET",
 	headers: {
@@ -8,9 +6,13 @@ const options = {
 	},
 };
 
-const Search = async () => {
+const Search = async id => {
+	let searchQuery = id ? id : "top";
 	try {
-		const response = await fetch(url, options);
+		const response = await fetch(
+			`https://spotify23.p.rapidapi.com/search/?q=${searchQuery}&type=multi&offset=0&limit=10&numberOfTopResults=5`,
+			options
+		);
 		const result = await response.json();
 
 		return result;
