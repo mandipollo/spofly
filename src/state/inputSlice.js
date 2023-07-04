@@ -9,7 +9,7 @@ const inputSlice = createSlice({
 		},
 
 		removeInput: state => {
-			return null;
+			return "";
 		},
 	},
 });

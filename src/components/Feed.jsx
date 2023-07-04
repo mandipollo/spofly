@@ -1,19 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-	Box,
-	CardContent,
-	CardMedia,
-	Typography,
-	Card,
-	Grid,
-} from "@mui/material";
+import { Box, CardMedia, Typography, Card, Grid } from "@mui/material";
 
 import Variants from "./layouts/Skeleton";
 
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { playTrackReducer } from "../state/playTrackSlice";
+
 import Search from "../fetch/Search";
 import StyledGridItem from "./styledComponents/StyledGridItem";
 import StyledCardContent from "./styledComponents/StyledCardContent";
@@ -21,7 +13,7 @@ import StyledCardContent from "./styledComponents/StyledCardContent";
 const Feed = () => {
 	// array for skeleton
 	const skeletonArray = Array.from({ length: 10 });
-	const dispatch = useDispatch();
+
 	// useState to store the data fetched
 	const [feed, setFeed] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
@@ -38,11 +30,6 @@ const Feed = () => {
 		feedHandler();
 	}, []);
 
-	// dispatch the track to the player state
-
-	const handleSelectedTrack = track => {
-		dispatch(playTrackReducer(track));
-	};
 	return (
 		<Box
 			flex={10}
@@ -148,17 +135,17 @@ const Feed = () => {
 						})}
 					</Grid>
 					<Typography sx={{ margin: "20px" }} variant="h6" color="white">
-						Playlist
+						Episodes
 					</Typography>
 					<Grid container flexDirection="row" spacing={1}>
-						{feed.playlists.items.map(item => {
+						{/* {feed.playlists.items.map(item => {
 							return (
 								<React.Fragment key={item.data.uri}>
 									<StyledGridItem key={`track${item.data.uri}`} item>
 										<Link
 											style={{ textDecoration: "none" }}
 											to={`/playlist/${item.data.uri}`}
-											state={`${item.data.uri.split(":")[2]}`}
+											// state={`${item.data.uri.split(":")[2]}`}
 											key={item.data.uri}
 										>
 											<Card
@@ -197,7 +184,7 @@ const Feed = () => {
 									</StyledGridItem>
 								</React.Fragment>
 							);
-						})}
+						})} */}
 					</Grid>
 				</>
 			) : (

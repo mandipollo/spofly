@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setInputReducer, removeInput } from "../state/inputSlice";
 import {
@@ -37,22 +37,23 @@ const CustomAppBar = styled(AppBar)(({ theme }) => ({
 	overflow: "hidden",
 }));
 const Navbar = () => {
+	const [textFieldKey, setTextFieldKey] = useState(0);
 	const theme = useTheme();
 	const location = useLocation();
 	const pathname = location.pathname;
 
 	const dispatch = useDispatch();
 	const state = useSelector(state => state.input);
-
+	console.log(state);
 	const handleInputChange = e => {
 		e.preventDefault();
 		const inputValue = e.target.value;
 		dispatch(setInputReducer(inputValue));
-		console.log(state);
 	};
 
 	const handleInputClear = e => {
-		dispatch(removeInput);
+		dispatch(removeInput());
+		setTextFieldKey(key => key + 1);
 	};
 
 	return (
@@ -73,6 +74,7 @@ const Navbar = () => {
 						}}
 					>
 						<TextField
+							key={textFieldKey}
 							value={state}
 							onChange={handleInputChange}
 							InputProps={{
@@ -117,6 +119,7 @@ const Navbar = () => {
 									"&.Mui-focused": {
 										backgroundColor: "#242424",
 										border: "1px solid white",
+										color: "white",
 									},
 									"& fieldset": {
 										border: "none",
