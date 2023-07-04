@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setInputReducer, removeInput } from "../state/inputSlice";
 import {
 	AppBar,
 	Button,
@@ -6,12 +8,15 @@ import {
 	Typography,
 	TextField,
 	InputAdornment,
+	IconButton,
 } from "@mui/material";
 import { useTheme } from "@emotion/react";
+import { useSelector } from "react-redux";
 import styled from "@emotion/styled";
 import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
 import { useLocation } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from "@mui/icons-material/Close";
 
 const CustomAppBar = styled(AppBar)(({ theme }) => ({
 	position: "fixed",
@@ -36,6 +41,20 @@ const Navbar = () => {
 	const location = useLocation();
 	const pathname = location.pathname;
 
+	const dispatch = useDispatch();
+	const state = useSelector(state => state.input);
+
+	const handleInputChange = e => {
+		e.preventDefault();
+		const inputValue = e.target.value;
+		dispatch(setInputReducer(inputValue));
+		console.log(state);
+	};
+
+	const handleInputClear = e => {
+		dispatch(removeInput);
+	};
+
 	return (
 		<>
 			<CustomAppBar
@@ -54,10 +73,28 @@ const Navbar = () => {
 						}}
 					>
 						<TextField
+							value={state}
+							onChange={handleInputChange}
 							InputProps={{
 								startAdornment: (
 									<InputAdornment position="start">
 										<SearchIcon sx={{ color: "#D8D8D8" }} />
+									</InputAdornment>
+								),
+								endAdornment: (
+									<InputAdornment position="end">
+										{state ? (
+											<IconButton onClick={handleInputClear}>
+												<CloseIcon
+													sx={{
+														color: "#D8D8D8",
+														"&:hover": {
+															cursor: "pointer",
+														},
+													}}
+												/>
+											</IconButton>
+										) : null}
 									</InputAdornment>
 								),
 							}}
@@ -124,7 +161,7 @@ const Navbar = () => {
 					</Button>
 					<Button
 						size="large"
-						sx={{ borderRadius: 3 }}
+						sx={{ borderRadius: 3, margin: "0 10px" }}
 						variant="contained"
 						color="success"
 					>
