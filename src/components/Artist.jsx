@@ -140,7 +140,7 @@ const Artist = props => {
 						<Tabs
 							value={selectedTab}
 							onChange={handleChange}
-							aria-label="basic tabs example"
+							aria-label="tab panel"
 							TabIndicatorProps={{
 								style: {
 									height: 0,

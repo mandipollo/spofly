@@ -29,6 +29,7 @@ const Player = () => {
 			}}
 		>
 			<H5AudioPlayer
+				autoPlay
 				volume={0.2}
 				autoPlayAfterSrcChange={false}
 				src={song}

@@ -44,7 +44,7 @@ const Navbar = () => {
 
 	const dispatch = useDispatch();
 	const state = useSelector(state => state.input);
-	console.log(state);
+
 	const handleInputChange = e => {
 		e.preventDefault();
 		const inputValue = e.target.value;

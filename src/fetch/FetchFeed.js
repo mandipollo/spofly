@@ -6,11 +6,10 @@ const options = {
 	},
 };
 
-const Search = async searchQuery => {
+const FetchFeed = async () => {
 	try {
-		if (searchQuery === "") return;
 		const response = await fetch(
-			`https://spotify23.p.rapidapi.com/search/?q=${searchQuery}&type=multi&offset=0&limit=10&numberOfTopResults=5`,
+			`https://spotify23.p.rapidapi.com/search/?q=top&type=multi&offset=0&limit=10&numberOfTopResults=5`,
 			options
 		);
 		const result = await response.json();
@@ -21,4 +20,4 @@ const Search = async searchQuery => {
 	}
 };
 
-export default Search;
+export default FetchFeed;

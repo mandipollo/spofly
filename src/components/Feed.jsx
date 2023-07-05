@@ -6,7 +6,7 @@ import Variants from "./layouts/Skeleton";
 
 import { useEffect, useState } from "react";
 
-import Search from "../fetch/Search";
+import FetchFeed from "../fetch/FetchFeed";
 import StyledGridItem from "./styledComponents/StyledGridItem";
 import StyledCardContent from "./styledComponents/StyledCardContent";
 
@@ -21,7 +21,7 @@ const Feed = () => {
 	// fetch the feed data when the componenet first mounts
 	useEffect(() => {
 		const feedHandler = async () => {
-			const results = await Search();
+			const results = await FetchFeed();
 			console.log(results);
 			setFeed(results);
 			setIsLoading(false);

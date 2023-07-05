@@ -1,8 +1,8 @@
-import { Card, Typography, CardMedia } from "@mui/material";
+import { Card, Typography, CardMedia, Avatar } from "@mui/material";
 import StyledGridItem from "../styledComponents/StyledGridItem";
 import StyledCardContent from "../styledComponents/StyledCardContent";
 import { Link } from "react-router-dom";
-const GridLayout = ({
+const GridLayoutAvatar = ({
 	itemId,
 	itemCoverArt,
 	itemName,
@@ -24,12 +24,16 @@ const GridLayout = ({
 							width: "200px",
 							height: "290px",
 							backgroundColor: "#262626",
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
+							flexDirection: "column",
 						}}
 					>
-						<CardMedia
-							title="album"
-							sx={{ height: "200px" }}
-							image={itemCoverArt ? itemCoverArt : null}
+						<Avatar
+							alt="Remy Sharp"
+							src={itemCoverArt ? itemCoverArt : null}
+							sx={{ height: "140px", width: "140px" }}
 						/>
 						<StyledCardContent>
 							<Typography
@@ -57,4 +61,4 @@ const GridLayout = ({
 	);
 };
 
-export default GridLayout;
+export default GridLayoutAvatar;
