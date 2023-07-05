@@ -13,7 +13,9 @@ import {
 	TableRow,
 	TableHead,
 	TableBody,
+	Avatar,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LoadingBox from "./LoadingBox";
 import StyledCard from "./styledComponents/StyledCard";
@@ -25,12 +27,11 @@ import ModuleTable from "./Table";
 const Playlist = props => {
 	const dispatch = useDispatch();
 
-	const [isLoading, setIsLoading] = useState(true);
 	const theme = useTheme();
 	// album id
 	const data = props.state;
-	console.log(data);
 
+	const [isLoading, setIsLoading] = useState(true);
 	// useState to set the fetched data
 	const [playlistData, setPlaylistData] = useState(null);
 
@@ -38,8 +39,7 @@ const Playlist = props => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await FetchPlaylist(data);
-				console.log(response);
+				const response = await FetchPlaylist(data.id);
 				setPlaylistData(response);
 				setIsLoading(false);
 			} catch (error) {
@@ -83,7 +83,17 @@ const Playlist = props => {
 								<CardMedia
 									component="img"
 									alt="image"
-									src={playlistData.images[0].url}
+									sx={{
+										height: {
+											xs: "auto",
+											sm: "auto",
+											md: "300px",
+
+											lg: "300px",
+											xl: "700px",
+										},
+									}}
+									src={data.images.items[0].sources[0].url}
 								></CardMedia>
 							</Paper>
 						)}
@@ -110,12 +120,14 @@ const Playlist = props => {
 									}}
 								>
 									<Typography variant="body2">Playlist</Typography>
-									<Typography color="white" variant="h2">
-										{playlistData.name}
+									<Typography color="white" variant="h6">
+										{data.name}
 									</Typography>
 									<Typography variant="body2">
-										{playlistData.tracks.items.length} Tracks
+										{playlistData.items.length} Tracks
 									</Typography>
+
+									<Typography variant="h6">{data.description}</Typography>
 								</CardContent>
 							)}
 						</Paper>
@@ -153,20 +165,20 @@ const Playlist = props => {
 
 								{playlistData && (
 									<TableBody>
-										{/* {playlistData.tracks.items.map((item, index) => {
-										return (
-											// <ModuleTable
-											// 	key={`${item.id}-${index}`}
-											// 	index={index}
-											// 	trackId={item.id}
-											// 	trackName={item.name}
-											// 	trackNumber={item.track_number}
-											// 	onClick={handleSelectedTrack}
-											// 	trackDurationMs={item.duration_ms}
-											// 	trackUrl={item.preview_url}
-											// />
-										);
-									})} */}
+										{playlistData.items.map((item, index) => {
+											return (
+												<ModuleTable
+													key={item.track.id}
+													index={index}
+													trackId={item.track.id}
+													trackName={item.track.name}
+													trackNumber={index + 1}
+													onClick={handleSelectedTrack}
+													trackDurationMs={item.track.duration_ms}
+													trackUrl={item.track.preview_url}
+												/>
+											);
+										})}
 									</TableBody>
 								)}
 							</Table>

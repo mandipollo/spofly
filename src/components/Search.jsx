@@ -1,14 +1,30 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Box, Grid, Tabs, Typography } from "@mui/material";
+import {
+	Box,
+	Grid,
+	Tabs,
+	Table,
+	TableContainer,
+	TableBody,
+	TableRow,
+	TableHead,
+	Paper,
+} from "@mui/material";
+import StyledTableCell from "./styledComponents/StyledTableCell";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import TabPanel from "./TabPanel";
 import StyledTab from "./styledComponents/StyledTab";
 import { useTheme } from "@emotion/react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import searchInput from "../fetch/Search";
 import GridLayoutAvatar from "./layouts/GridLayoutAvatar";
 import GridLayout from "./layouts/GridLayout";
+import ModuleTable from "./Table";
+import { playTrackReducer } from "../state/playTrackSlice";
+
 const Search = () => {
 	const theme = useTheme();
+	const dispatch = useDispatch();
 
 	const [data, setData] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
@@ -38,6 +54,12 @@ const Search = () => {
 	const handleChange = (props, index) => {
 		setSelectedTab(index);
 	};
+
+	// hanlde track
+
+	const handleSelectedTrack = track => {
+		dispatch(playTrackReducer(track));
+	};
 	return (
 		<Box
 			sx={{
@@ -61,10 +83,8 @@ const Search = () => {
 			>
 				<StyledTab label="artists" />
 				<StyledTab label="albums" />
-				<StyledTab label="episodes" />
-				<StyledTab label="playlists" />
-				<StyledTab label="podcast" />
-				<StyledTab label="top results" />
+
+				<StyledTab label="featured" />
 				<StyledTab label="tracks" />
 			</Tabs>
 			{data && !isLoading && (
@@ -100,20 +120,52 @@ const Search = () => {
 							})}
 						</Grid>
 					</TabPanel>
+
 					<TabPanel value={selectedTab} index={2}>
-						<Typography variant="h6">3</Typography>
+						<Grid container flexDirection="row" spacing={1}>
+							{data.topResults.featured.map(item => {
+								return (
+									<GridLayout
+										key={item.data.uri}
+										itemProfileName={item.data.name}
+										itemCoverArt={item.data.images.items[0].sources[0].url}
+									/>
+								);
+							})}
+						</Grid>
 					</TabPanel>
 					<TabPanel value={selectedTab} index={3}>
-						<Typography variant="h6">4</Typography>
-					</TabPanel>
-					<TabPanel value={selectedTab} index={4}>
-						<Typography variant="h6">5</Typography>
-					</TabPanel>
-					<TabPanel value={selectedTab} index={5}>
-						<Typography variant="h6">6</Typography>
-					</TabPanel>
-					<TabPanel value={selectedTab} index={6}>
-						<Typography variant="h6">7</Typography>
+						<TableContainer
+							component={Paper}
+							sx={{
+								background: "none",
+								display: "flex",
+								justifyContent: "center",
+								alignItems: "center",
+								color: "#A7A7A7",
+							}}
+						>
+							<Table sx={{ width: "90%", paddingTop: "10px" }}>
+								<TableBody>
+									{data.tracks.items.map((item, index) => {
+										return (
+											<ModuleTable
+												albumArt={
+													item.data.albumOfTrack.coverArt.sources[1].url
+												}
+												key={index}
+												onClick={handleSelectedTrack}
+												trackId={item.data.id}
+												trackName={item.data.name}
+												// onClick={handleSelectedTrack}
+												trackDurationMs={item.data.duration.totalMilliseconds}
+												trackUrl={item.preview_url}
+											/>
+										);
+									})}
+								</TableBody>
+							</Table>
+						</TableContainer>
 					</TabPanel>
 				</>
 			)}

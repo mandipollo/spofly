@@ -38,7 +38,10 @@ const ModuleTable = ({
 					<Avatar variant="square" src={albumArt} />
 				</StyledTableCell>
 			)}
-			<StyledTableCell onClick={() => onClick(trackUrl)} align="left">
+			<StyledTableCell
+				onClick={() => onClick(trackUrl ? trackUrl : null)}
+				align="left"
+			>
 				{trackName}
 			</StyledTableCell>
 			<StyledTableCell align="left">

@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 const PlaylistPage = () => {
 	const location = useLocation();
 	const state = location?.state;
+
 	return <Playlist state={state} />;
 };
 

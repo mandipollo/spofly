@@ -9,11 +9,11 @@ const options = {
 const FetchPlaylist = async playlistId => {
 	try {
 		const response = await fetch(
-			`https://spotify23.p.rapidapi.com/playlist/?id=${playlistId}`,
+			`https://spotify23.p.rapidapi.com/playlist_tracks/?id=${playlistId}&offset=0&limit=40`,
 			options
 		);
 		const result = await response.json();
-		console.log(result);
+
 		return result;
 	} catch (error) {
 		console.error(error);

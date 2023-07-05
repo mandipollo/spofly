@@ -222,6 +222,8 @@ const Artist = props => {
 								item => {
 									return (
 										<GridLayout
+											itemRoute={`/playlist/${item.uri}`}
+											itemState={item}
 											key={item.id}
 											itemId={item.id}
 											itemCoverArt={item.images.items[0].sources[0].url}

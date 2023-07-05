@@ -113,7 +113,7 @@ const Album = props => {
 									}}
 								>
 									<Typography variant="body2">Album</Typography>
-									<Typography color="white" variant="h2">
+									<Typography color="white" variant="h6">
 										{albumData.albums[0].name}
 									</Typography>
 									<Typography variant="body2">
