@@ -18,6 +18,7 @@ import GridLayoutAvatar from "./layouts/GridLayoutAvatar";
 import GridLayout from "./layouts/GridLayout";
 import ModuleTable from "./Table";
 import { playTrackReducer } from "../state/playTrackSlice";
+import axios from "axios";
 
 const Search = () => {
 	const theme = useTheme();
@@ -33,11 +34,20 @@ const Search = () => {
 	//fetch the search input
 
 	useEffect(() => {
-		const id = setTimeout(async () => {
-			const response = await searchInput(state);
-			console.log(response);
-			setData(response);
-			setIsLoading(false);
+		const id = setTimeout(() => {
+			const options = {
+				method: "GET",
+				url: `http://localhost:8000/search?searchQuery=${state}`,
+			};
+			axios
+				.request(options)
+				.then(response => {
+					setData(response.data);
+					setIsLoading(false);
+				})
+				.catch(error => {
+					console.log(error);
+				});
 		}, 500);
 
 		return () => {

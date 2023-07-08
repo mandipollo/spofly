@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
 	Box,
 	Card,
@@ -9,7 +10,7 @@ import {
 	CardMedia,
 } from "@mui/material";
 import { useDispatch } from "react-redux";
-import FetchArtistOverview from "../fetch/FetchArtistOverview";
+
 import { TableContainer, TableBody, Table, Tabs } from "@mui/material";
 import TabPanel from "./TabPanel";
 import StyledTab from "./styledComponents/StyledTab";
@@ -35,18 +36,33 @@ const Artist = props => {
 	const artistId = props.data;
 
 	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await FetchArtistOverview(artistId);
-				console.log(response);
-				setArtistOverview(response);
-				setIsLoading(false);
-			} catch (error) {
-				throw Error("seomething went wrong !");
-			}
+		// const fetchData = async () => {
+		// 	try {
+		// 		const response = await FetchArtistOverview(artistId);
+		// 		console.log(response);
+		// 		setArtistOverview(response);
+		// 		setIsLoading(false);
+		// 	} catch (error) {
+		// 		throw Error("seomething went wrong !");
+		// 	}
+		// };
+
+		// fetchData();
+
+		const options = {
+			method: "GET",
+			url: `http://localhost:8000/fetchArtistOverview?artist=${artistId}`,
 		};
 
-		fetchData();
+		axios
+			.request(options)
+			.then(response => {
+				setArtistOverview(response.data);
+				setIsLoading(false);
+			})
+			.catch(error => {
+				console.log(error);
+			});
 	}, [artistId]);
 
 	const handleTrack = track => {

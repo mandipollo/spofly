@@ -6,9 +6,9 @@ import Variants from "./layouts/Skeleton";
 
 import { useEffect, useState } from "react";
 
-import FetchFeed from "../fetch/FetchFeed";
 import StyledGridItem from "./styledComponents/StyledGridItem";
 import StyledCardContent from "./styledComponents/StyledCardContent";
+import axios from "axios";
 
 const Feed = () => {
 	// array for skeleton
@@ -20,17 +20,15 @@ const Feed = () => {
 
 	// fetch the feed data when the componenet first mounts
 	useEffect(() => {
-		try {
-			const feedHandler = async () => {
-				const results = await FetchFeed();
-				console.log(results);
-				setFeed(results);
-				setIsLoading(false);
-			};
-			feedHandler();
-		} catch (error) {
-			throw Error("cannot fetch the data!");
-		}
+		const options = {
+			method: "GET",
+			url: "http://localhost:8000/feed",
+		};
+
+		axios.request(options).then(response => {
+			setFeed(response.data);
+			setIsLoading(false);
+		});
 	}, []);
 
 	return (

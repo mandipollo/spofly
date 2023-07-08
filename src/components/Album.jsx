@@ -25,6 +25,7 @@ import FetchAlbum from "../fetch/FetchAlbum";
 import { useTheme } from "@mui/material/styles";
 import ModuleTable from "./Table";
 import SkeletonAlbum from "./layouts/SkeletonAlbum";
+import axios from "axios";
 const Album = props => {
 	const dispatch = useDispatch();
 
@@ -38,18 +39,33 @@ const Album = props => {
 
 	// fetch album data when the component mounts
 	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await FetchAlbum(data);
-				console.log(response);
-				setAlbumData(response);
-				setIsLoading(false);
-			} catch (error) {
-				throw Error("cannot fetch the data!");
-			}
+		// const fetchData = async () => {
+		// 	try {
+		// 		const response = await FetchAlbum(data);
+		// 		console.log(response);
+		// 		setAlbumData(response);
+		// 		setIsLoading(false);
+		// 	} catch (error) {
+		// 		throw Error("cannot fetch the data!");
+		// 	}
+		// };
+
+		// fetchData();
+
+		const options = {
+			method: "GET",
+			url: `http://localhost:8000/fetchAlbum?id=${data}`,
 		};
 
-		fetchData();
+		axios
+			.request(options)
+			.then(response => {
+				setAlbumData(response.data);
+				setIsLoading(false);
+			})
+			.catch(error => {
+				console.log(error);
+			});
 	}, [data]);
 
 	const handleSelectedTrack = track => {

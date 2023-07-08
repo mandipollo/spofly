@@ -22,6 +22,7 @@ import StyledTableCell from "./styledComponents/StyledTableCell";
 import FetchPlaylist from "../fetch/FetchPlaylist";
 import { useTheme } from "@mui/material/styles";
 import ModuleTable from "./Table";
+import axios from "axios";
 
 const Playlist = props => {
 	const dispatch = useDispatch();
@@ -36,17 +37,28 @@ const Playlist = props => {
 
 	// fetch album data when the component mounts
 	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await FetchPlaylist(data.id);
-				setPlaylistData(response);
-				setIsLoading(false);
-			} catch (error) {
-				console.log(error.message);
-			}
-		};
+		// const fetchData = async () => {
+		// 	try {
+		// 		const response = await FetchPlaylist(data.id);
+		// 		setPlaylistData(response);
+		// 		setIsLoading(false);
+		// 	} catch (error) {
+		// 		console.log(error.message);
+		// 	}
+		// };
 
-		fetchData();
+		// fetchData();
+
+		axios
+			.request(`http://localhost:8000/fetchPlaylist?playlistId=${data.id}`)
+			.then(response => {
+				setPlaylistData(response.data);
+				console.log(response);
+				setIsLoading(false);
+			})
+			.catch(error => {
+				console.log(error);
+			});
 	}, [data]);
 
 	const handleSelectedTrack = track => {
