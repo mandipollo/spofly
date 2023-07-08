@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { playTrackReducer } from "../state/playTrackSlice";
 
 import {
+	Button,
 	Box,
 	CardContent,
 	CardMedia,
@@ -14,9 +15,7 @@ import {
 	TableRow,
 	TableHead,
 	TableBody,
-	Skeleton,
 	Avatar,
-	Stack,
 } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
@@ -46,7 +45,7 @@ const Album = props => {
 				setAlbumData(response);
 				setIsLoading(false);
 			} catch (error) {
-				console.log(error.message);
+				throw Error("cannot fetch the data!");
 			}
 		};
 
@@ -96,7 +95,7 @@ const Album = props => {
 								flex: 1,
 								marginRight: 5,
 								height: 300,
-								display: "flex",
+								// display: "flex",
 								color: "#A7A7A7",
 								backgroundColor: "#1D1D1D",
 								display: { xs: "none", sm: "flex" },
@@ -130,9 +129,16 @@ const Album = props => {
 										to={`/artist/${albumData.albums[0].artists[0].uri}`}
 										state={`${albumData.albums[0].artists[0].id}`}
 									>
-										<Typography variant="h6">
-											{albumData.albums[0].artists[0].name}
-										</Typography>
+										<Button
+											size="large"
+											sx={{ borderRadius: 3 }}
+											variant="contained"
+											color="success"
+										>
+											<Typography variant="h6">
+												{albumData.albums[0].artists[0].name}
+											</Typography>
+										</Button>
 									</Link>
 								</CardContent>
 							)}

@@ -1,4 +1,4 @@
-import { Card, Typography, CardMedia, Avatar } from "@mui/material";
+import { Card, Typography, Avatar } from "@mui/material";
 import StyledGridItem from "../styledComponents/StyledGridItem";
 import StyledCardContent from "../styledComponents/StyledCardContent";
 import { Link } from "react-router-dom";

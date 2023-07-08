@@ -20,14 +20,17 @@ const Feed = () => {
 
 	// fetch the feed data when the componenet first mounts
 	useEffect(() => {
-		const feedHandler = async () => {
-			const results = await FetchFeed();
-			console.log(results);
-			setFeed(results);
-			setIsLoading(false);
-		};
-
-		feedHandler();
+		try {
+			const feedHandler = async () => {
+				const results = await FetchFeed();
+				console.log(results);
+				setFeed(results);
+				setIsLoading(false);
+			};
+			feedHandler();
+		} catch (error) {
+			throw Error("cannot fetch the data!");
+		}
 	}, []);
 
 	return (

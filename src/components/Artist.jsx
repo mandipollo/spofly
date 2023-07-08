@@ -36,10 +36,14 @@ const Artist = props => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await FetchArtistOverview(artistId);
-			console.log(response);
-			setArtistOverview(response);
-			setIsLoading(false);
+			try {
+				const response = await FetchArtistOverview(artistId);
+				console.log(response);
+				setArtistOverview(response);
+				setIsLoading(false);
+			} catch (error) {
+				throw Error("seomething went wrong !");
+			}
 		};
 
 		fetchData();
@@ -66,7 +70,10 @@ const Artist = props => {
 								display: "flex",
 								flexDirection: "column",
 								justifyContent: "flex-end",
-								backgroundImage: `url(${artistOverview.data.artist.visuals.headerImage.sources[0].url} )`,
+								backgroundImage: `url(${
+									artistOverview.data.artist.visuals.headerImage.sources[0]
+										?.url || ""
+								} )`,
 								backgroundSize: "cover",
 								backgroundPosition: "center",
 								backgroundRepeat: "no-repeat",
@@ -87,7 +94,7 @@ const Artist = props => {
 								</Typography>
 
 								<Typography color="#A7A7A7" variant="body1">
-									{artistOverview.data.artist.stats.monthlyListeners.toLocaleString()}{" "}
+									{artistOverview.data.artist.stats.monthlyListeners.toLocaleString()}
 									monthly listeneres
 								</Typography>
 							</CardContent>

@@ -44,7 +44,7 @@ const SkeletonAlbum = () => {
 						flex: 1,
 						marginRight: 5,
 						height: 300,
-						display: "flex",
+						// display: "flex",
 						color: "#A7A7A7",
 						backgroundColor: "#1D1D1D",
 						display: { xs: "none", sm: "flex" },

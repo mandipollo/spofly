@@ -13,11 +13,13 @@ import AlbumPage from "./pages/AlbumPage";
 import ArtistPage from "./pages/ArtistPage";
 import PlaylistPage from "./pages/PlaylistPage";
 import SearchPage from "./pages/SearchPage";
+import ErrorEl from "./error/ErrorEl";
 
 const routes = createBrowserRouter([
 	{
 		path: "/",
 		element: <Root />,
+		errorElement: <ErrorEl />,
 		children: [
 			{
 				index: true,
@@ -27,7 +29,10 @@ const routes = createBrowserRouter([
 				path: "album/:albumId",
 				element: <AlbumPage />,
 			},
-			{ path: "artist/:artistId", element: <ArtistPage /> },
+			{
+				path: "artist/:artistId",
+				element: <ArtistPage />,
+			},
 			{
 				path: "playlist/:playlistId",
 				element: <PlaylistPage />,

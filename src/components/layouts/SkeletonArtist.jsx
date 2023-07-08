@@ -12,9 +12,8 @@ import {
 	TableRow,
 	Grid,
 	Box,
-	Tabs,
 } from "@mui/material";
-import StyledTab from "../styledComponents/StyledTab";
+
 import StyledTableCell from "../styledComponents/StyledTableCell";
 const SkeletonArtist = () => {
 	return (

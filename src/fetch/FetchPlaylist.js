@@ -1,7 +1,9 @@
+const apiKey = process.env.REACT_APP_API_KEY;
+
 const options = {
 	method: "GET",
 	headers: {
-		"X-RapidAPI-Key": "d0b3e7db6bmshd25a0a578456aa6p15d5eejsnd549f9fb9d6c",
+		"X-RapidAPI-Key": apiKey,
 		"X-RapidAPI-Host": "spotify23.p.rapidapi.com",
 	},
 };
@@ -16,7 +18,7 @@ const FetchPlaylist = async playlistId => {
 
 		return result;
 	} catch (error) {
-		console.error(error);
+		throw Error("oops something went wrong");
 	}
 };
 

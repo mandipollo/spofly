@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import {
 	Box,
 	Grid,
@@ -6,12 +6,9 @@ import {
 	Table,
 	TableContainer,
 	TableBody,
-	TableRow,
-	TableHead,
 	Paper,
 } from "@mui/material";
-import StyledTableCell from "./styledComponents/StyledTableCell";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
+
 import TabPanel from "./TabPanel";
 import StyledTab from "./styledComponents/StyledTab";
 import { useTheme } from "@emotion/react";
@@ -32,8 +29,6 @@ const Search = () => {
 
 	// retrieve the state of the input
 	const state = useSelector(state => state.input);
-
-	const prevRef = useRef(state);
 
 	//fetch the search input
 

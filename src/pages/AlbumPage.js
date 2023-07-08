@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import Album from "../components/Album";
-import Navbar from "../components/Navbar";
+
 const AlbumPage = () => {
 	const location = useLocation();
 
