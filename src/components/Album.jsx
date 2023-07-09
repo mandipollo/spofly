@@ -21,7 +21,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 import StyledCard from "./styledComponents/StyledCard";
 import StyledTableCell from "./styledComponents/StyledTableCell";
-import FetchAlbum from "../fetch/FetchAlbum";
+
 import { useTheme } from "@mui/material/styles";
 import ModuleTable from "./Table";
 import SkeletonAlbum from "./layouts/SkeletonAlbum";

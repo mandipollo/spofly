@@ -19,7 +19,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LoadingBox from "./LoadingBox";
 import StyledCard from "./styledComponents/StyledCard";
 import StyledTableCell from "./styledComponents/StyledTableCell";
-import FetchPlaylist from "../fetch/FetchPlaylist";
+
 import { useTheme } from "@mui/material/styles";
 import ModuleTable from "./Table";
 import axios from "axios";

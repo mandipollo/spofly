@@ -13,7 +13,7 @@ import TabPanel from "./TabPanel";
 import StyledTab from "./styledComponents/StyledTab";
 import { useTheme } from "@emotion/react";
 import { useSelector, useDispatch } from "react-redux";
-import searchInput from "../fetch/Search";
+
 import GridLayoutAvatar from "./layouts/GridLayoutAvatar";
 import GridLayout from "./layouts/GridLayout";
 import ModuleTable from "./Table";
