@@ -10,31 +10,16 @@ import {
 import PauseCircleFilledIcon from "@mui/icons-material/PauseCircleFilled";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { auth } from "../../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-
-const api = process.env.REACT_APP_FIREBASE_API_KEY;
-console.log(api);
-
-const Signup = () => {
-	const [name, setName] = useState("");
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../../state/currentUserSlice";
+const Login = () => {
+	const dispatch = useDispatch();
 	const [password, setPassword] = useState("");
 	const [email, setEmail] = useState("");
-	const [nameError, setNameError] = useState(false);
+
 	const [passwordError, setPasswordError] = useState(false);
 	const [emailError, setEmailError] = useState(false);
-
-	// name
-	const nameHandler = e => {
-		setName(e.target.value);
-	};
-
-	const checkNameHandler = e => {
-		if (name.length < 3) {
-			setNameError(true);
-		} else {
-			setNameError(false);
-		}
-	};
 
 	// password
 	const passwordHandler = e => {
@@ -62,16 +47,11 @@ const Signup = () => {
 		}
 	};
 
-	const submitHandler = async e => {
+	const submitHandler = e => {
 		e.preventDefault();
-		if (emailError || nameError || passwordError) return;
-		createUserWithEmailAndPassword(auth, email, password)
-			.then(response => {
-				console.log(response.user);
-			})
-			.catch(error => {
-				console.log(error.message);
-			});
+		signInWithEmailAndPassword(auth, email, password).then(userCreditials => {
+			dispatch(setCurrentUser(userCreditials.user));
+		});
 	};
 	return (
 		<Box>
@@ -98,15 +78,8 @@ const Signup = () => {
 					<PauseCircleFilledIcon color="success" fontSize="large" />
 					<Typography variant="h6">Musbrary</Typography>
 				</Box>
-				<Typography variant="h6" sx={{ fontWeight: 900 }}>
-					Sign up for free to start listening music.
-				</Typography>
-
-				<Typography
-					variant="body1"
-					sx={{ fontWeight: 600, margin: "30px 0 10px 0" }}
-				>
-					Sign up with your email address
+				<Typography variant="h4" sx={{ fontWeight: 900, margin: 4 }}>
+					Log in musbrary account.
 				</Typography>
 
 				<TextField
@@ -117,7 +90,7 @@ const Signup = () => {
 					error={emailError}
 					variant="standard"
 					placeholder="Enter your email."
-					label="whats your email address?"
+					label="Email address"
 					id="outlined-start-adornment"
 					sx={{ m: 1, width: "400px" }}
 					InputProps={{
@@ -131,8 +104,8 @@ const Signup = () => {
 					error={passwordError}
 					type="password"
 					variant="standard"
-					placeholder="Create your password."
-					label="Create your password"
+					placeholder="Password"
+					label="Password"
 					id="outlined-start-adornment"
 					sx={{ m: 1, width: "400px" }}
 					helperText={
@@ -145,25 +118,6 @@ const Signup = () => {
 								<VisibilityOffIcon />
 							</InputAdornment>
 						),
-					}}
-				/>
-				<TextField
-					onBlur={checkNameHandler}
-					error={nameError}
-					value={name}
-					onChange={nameHandler}
-					variant="standard"
-					placeholder="Enter your profile name."
-					label="what should we call you?"
-					id="outlined-start-adornment"
-					sx={{ m: 1, width: "400px" }}
-					helperText={
-						nameError
-							? "Name cannot be shorter then 3 characters"
-							: "This appears on your profile."
-					}
-					InputProps={{
-						startAdornment: <InputAdornment position="start"></InputAdornment>,
 					}}
 				/>
 				<Button
@@ -184,7 +138,23 @@ const Signup = () => {
 						},
 					}}
 				>
-					Sign up
+					Log in
+				</Button>
+				<Button
+					variant="text"
+					sx={{
+						color: "black",
+						textDecoration: "underline",
+
+						"&:hover": {
+							color: "#1AD760",
+							backgroundColor: "inherit",
+							border: "none",
+							textDecoration: "underline",
+						},
+					}}
+				>
+					Forgot your password?
 				</Button>
 				<Box
 					sx={{
@@ -194,8 +164,8 @@ const Signup = () => {
 						alignItems: "center",
 					}}
 				>
-					<Typography variant="body2">Have an account?</Typography>
-					<Link to="/login">
+					<Typography variant="body2">Don't have an account?</Typography>
+					<Link to="/signup">
 						<Button
 							sx={{
 								color: "#1AD760",
@@ -207,7 +177,7 @@ const Signup = () => {
 								},
 							}}
 						>
-							Log in.
+							Sign up
 						</Button>
 					</Link>
 				</Box>
@@ -216,4 +186,4 @@ const Signup = () => {
 	);
 };
 
-export default Signup;
+export default Login;

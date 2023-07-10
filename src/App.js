@@ -15,6 +15,7 @@ import PlaylistPage from "./pages/PlaylistPage";
 import SearchPage from "./pages/SearchPage";
 import ErrorEl from "./error/ErrorEl";
 import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
 
 const routes = createBrowserRouter([
 	{
@@ -48,6 +49,7 @@ const routes = createBrowserRouter([
 		path: "signup",
 		element: <SignupPage />,
 	},
+	{ path: "login", element: <LoginPage /> },
 ]);
 const App = () => {
 	return (
