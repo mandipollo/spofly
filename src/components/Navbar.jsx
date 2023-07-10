@@ -14,7 +14,7 @@ import { useTheme } from "@emotion/react";
 import { useSelector } from "react-redux";
 import styled from "@emotion/styled";
 import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -159,9 +159,11 @@ const Navbar = () => {
 						flex: 6,
 					}}
 				>
-					<Button sx={{ marginRight: 6 }} variant="text">
-						Sign up
-					</Button>
+					<Link to="/signup">
+						<Button sx={{ marginRight: 6 }} variant="text">
+							Sign up
+						</Button>
+					</Link>
 					<Button
 						size="large"
 						sx={{ borderRadius: 3, margin: "0 10px" }}

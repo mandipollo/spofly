@@ -14,6 +14,7 @@ import ArtistPage from "./pages/ArtistPage";
 import PlaylistPage from "./pages/PlaylistPage";
 import SearchPage from "./pages/SearchPage";
 import ErrorEl from "./error/ErrorEl";
+import SignupPage from "./pages/SignupPage";
 
 const routes = createBrowserRouter([
 	{
@@ -42,6 +43,10 @@ const routes = createBrowserRouter([
 				element: <SearchPage />,
 			},
 		],
+	},
+	{
+		path: "signup",
+		element: <SignupPage />,
 	},
 ]);
 const App = () => {
