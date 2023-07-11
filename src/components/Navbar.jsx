@@ -17,6 +17,9 @@ import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
 import { Link, useLocation } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
+import { auth } from "../firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { resetUser } from "../state/currentUserSlice";
 
 const CustomAppBar = styled(AppBar)(({ theme }) => ({
 	position: "fixed",
@@ -38,22 +41,50 @@ const CustomAppBar = styled(AppBar)(({ theme }) => ({
 }));
 const Navbar = () => {
 	const [textFieldKey, setTextFieldKey] = useState(0);
+	const [userStatus, setUserStatus] = useState(false);
 	const theme = useTheme();
 	const location = useLocation();
 	const pathname = location.pathname;
 
 	const dispatch = useDispatch();
+
+	// input value
 	const state = useSelector(state => state.input);
 
+	// dispatch input value to the redux state
 	const handleInputChange = e => {
 		e.preventDefault();
 		const inputValue = e.target.value;
 		dispatch(setInputReducer(inputValue));
 	};
 
+	// clear the redux state value
 	const handleInputClear = e => {
 		dispatch(removeInput());
 		setTextFieldKey(key => key + 1);
+	};
+
+	// observe auth
+
+	const userDisplayName = useSelector(state => state.user);
+	console.log(userDisplayName);
+	onAuthStateChanged(auth, user => {
+		if (user) {
+			setUserStatus(true);
+		} else {
+			setUserStatus(false);
+		}
+	});
+
+	// log out
+
+	const logoutHandler = () => {
+		if (auth.currentUser) {
+			signOut(auth).then(() => {
+				console.log("signed out");
+			});
+			dispatch(resetUser());
+		}
 	};
 
 	return (
@@ -164,14 +195,30 @@ const Navbar = () => {
 							Sign up
 						</Button>
 					</Link>
-					<Button
-						size="large"
-						sx={{ borderRadius: 3, margin: "0 10px" }}
-						variant="contained"
-						color="success"
-					>
-						Log In
-					</Button>
+
+					{userStatus ? (
+						<Button
+							size="large"
+							sx={{ borderRadius: 3, margin: "0 10px" }}
+							variant="contained"
+							color="success"
+							onClick={logoutHandler}
+						>
+							{userStatus ? "Signout" : "Login"}
+						</Button>
+					) : (
+						<Link to="/login">
+							<Button
+								size="large"
+								sx={{ borderRadius: 3, margin: "0 10px" }}
+								variant="contained"
+								color="success"
+								onClick={logoutHandler}
+							>
+								{userStatus ? "Signout" : "Login"}
+							</Button>
+						</Link>
+					)}
 				</Box>
 			</CustomAppBar>
 		</>

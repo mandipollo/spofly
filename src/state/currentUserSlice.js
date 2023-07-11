@@ -2,7 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const currentUserSlice = createSlice({
 	name: "user",
-	initialState: null,
+	initialState: {
+		displayName: "",
+		uid: "",
+	},
 	reducers: {
 		setCurrentUser: (state, action) => {
 			return action.payload;

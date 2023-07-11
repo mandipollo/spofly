@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
 	Box,
 	Typography,
@@ -49,9 +49,15 @@ const Login = () => {
 
 	const submitHandler = e => {
 		e.preventDefault();
-		signInWithEmailAndPassword(auth, email, password).then(userCreditials => {
-			dispatch(setCurrentUser(userCreditials.user));
-		});
+		signInWithEmailAndPassword(auth, email, password)
+			.then(userCreditials => {
+				const { displayName, uid } = userCreditials.user;
+				console.log(userCreditials.user);
+				dispatch(setCurrentUser({ displayName, uid }));
+			})
+			.catch(error => {
+				console.log(error);
+			});
 	};
 	return (
 		<Box>

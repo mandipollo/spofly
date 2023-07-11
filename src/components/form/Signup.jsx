@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
 	Box,
 	Typography,
@@ -10,10 +10,7 @@ import {
 import PauseCircleFilledIcon from "@mui/icons-material/PauseCircleFilled";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { auth } from "../../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-
-const api = process.env.REACT_APP_FIREBASE_API_KEY;
-console.log(api);
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const Signup = () => {
 	const [name, setName] = useState("");
@@ -62,16 +59,20 @@ const Signup = () => {
 		}
 	};
 
+	// create new user and update the display name
 	const submitHandler = async e => {
 		e.preventDefault();
 		if (emailError || nameError || passwordError) return;
-		createUserWithEmailAndPassword(auth, email, password)
-			.then(response => {
-				console.log(response.user);
-			})
-			.catch(error => {
-				console.log(error.message);
+
+		try {
+			await createUserWithEmailAndPassword(auth, email, password);
+
+			await updateProfile(auth.currentUser, {
+				displayName: name,
 			});
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	return (
 		<Box>
