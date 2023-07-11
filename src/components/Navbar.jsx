@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setInputReducer, removeInput } from "../state/inputSlice";
 import {
@@ -19,7 +19,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import { auth } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { resetUser } from "../state/currentUserSlice";
+import { setUserLogout } from "../state/currentUserSlice";
 
 const CustomAppBar = styled(AppBar)(({ theme }) => ({
 	position: "fixed",
@@ -66,27 +66,32 @@ const Navbar = () => {
 
 	// observe auth
 
-	const userDisplayName = useSelector(state => state.user);
-	console.log(userDisplayName);
-	onAuthStateChanged(auth, user => {
-		if (user) {
-			setUserStatus(true);
-		} else {
-			setUserStatus(false);
-		}
-	});
+	const userDisplayName = useSelector(state => state.user.displayName);
+
+	useEffect(() => {
+		const unsubscribe = onAuthStateChanged(auth, user => {
+			if (user) {
+				setUserStatus(true);
+			} else {
+				setUserStatus(false);
+			}
+		});
+		return () => {
+			unsubscribe();
+		};
+	}, []);
 
 	// log out
 
 	const logoutHandler = () => {
 		if (auth.currentUser) {
-			signOut(auth).then(() => {
-				console.log("signed out");
-			});
-			dispatch(resetUser());
+			signOut(auth)
+				.then(() => {
+					console.log("signed out");
+				})
+				.then(() => dispatch(setUserLogout()));
 		}
 	};
-
 	return (
 		<>
 			<CustomAppBar
@@ -190,11 +195,17 @@ const Navbar = () => {
 						flex: 6,
 					}}
 				>
-					<Link to="/signup">
-						<Button sx={{ marginRight: 6 }} variant="text">
-							Sign up
-						</Button>
-					</Link>
+					{userStatus ? (
+						<Typography variant="h6" color="green" justifySelf="flex-start">
+							{userDisplayName}
+						</Typography>
+					) : (
+						<Link to="/signup">
+							<Button sx={{ marginRight: 6 }} variant="text">
+								Sign up
+							</Button>
+						</Link>
+					)}
 
 					{userStatus ? (
 						<Button

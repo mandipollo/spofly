@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
 	Box,
 	Typography,
@@ -13,8 +13,10 @@ import { auth } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../../state/currentUserSlice";
+
 const Login = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const [password, setPassword] = useState("");
 	const [email, setEmail] = useState("");
 
@@ -49,15 +51,25 @@ const Login = () => {
 
 	const submitHandler = e => {
 		e.preventDefault();
-		signInWithEmailAndPassword(auth, email, password)
-			.then(userCreditials => {
-				const { displayName, uid } = userCreditials.user;
-				console.log(userCreditials.user);
-				dispatch(setCurrentUser({ displayName, uid }));
-			})
-			.catch(error => {
-				console.log(error);
-			});
+
+		try {
+			signInWithEmailAndPassword(auth, email, password)
+				.then(userCreditials => {
+					console.log(userCreditials.user);
+					dispatch(
+						setCurrentUser({
+							displayName: userCreditials.user.displayName,
+							uid: userCreditials.user.uid,
+						})
+					);
+					navigate("/");
+				})
+				.catch(error => {
+					console.log(error);
+				});
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	return (
 		<Box>

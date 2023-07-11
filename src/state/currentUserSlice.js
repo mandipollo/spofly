@@ -8,15 +8,17 @@ const currentUserSlice = createSlice({
 	},
 	reducers: {
 		setCurrentUser: (state, action) => {
-			return action.payload;
+			state.displayName = action.payload.displayName;
+			state.uid = action.payload.uid;
 		},
 
-		resetUser: state => {
-			return null;
+		setUserLogout: state => {
+			state.displayName = null;
+			state.uid = null;
 		},
 	},
 });
 
-export const { setCurrentUser, resetUser } = currentUserSlice.actions;
+export const { setCurrentUser, setUserLogout } = currentUserSlice.actions;
 
 export default currentUserSlice.reducer;
